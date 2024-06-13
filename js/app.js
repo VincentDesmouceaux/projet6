@@ -5,15 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const genresURL = 'http://127.0.0.1:8000/api/v1/genres/';
 
     // Fetch and display the best movie
-    fetch(`${apiBaseURL}?sort_by=-imdb_score&limit=1`)
+    const bestFilmsUrl = `${apiBaseURL}?sort_by=-imdb_score&limit=1`;
+     fetch(bestFilmsUrl)
+    .then(response => response.json())
+    .then(data => {
+        const movie = data.results[0];
+        console.log(movie)
+    
+        const theBestFilmDetailUrl = `${apiBaseURL}${movie.id}`;
+         fetch(theBestFilmDetailUrl)
         .then(response => response.json())
         .then(data => {
-            const movie = data.results[0];
+          
             document.getElementById('best-movie-img').src = movie.image_url;
             document.getElementById('best-movie-title').textContent = movie.title;
-            document.getElementById('best-movie-summary').textContent = movie.description;
+            document.getElementById('best-movie-summary').textContent = data.description;
             document.getElementById('best-movie-details-btn').dataset.id = movie.id;
         });
+    });
 
     // Fetch and display top-rated movies
     fetch(`${apiBaseURL}?sort_by=-imdb_score&limit=6`)
