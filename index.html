@@ -4,100 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JustStreamIt</title>
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
     <header>
-        <h1>JustStreamIt</h1>
-        <h2>Vidéos à la demande</h2>
+        <img src="img/juststreamiy.png" alt="JustStreamIt Logo" class="logo">
+        <div class="header-text">
+            <h2>Vidéos à la demande</h2>
+        </div>
     </header>
     <main>
         <section id="best-movie">
             <h2>Meilleur film</h2>
             <div id="best-movie-details">
-                <img src="https://picsum.photos/200/300" alt="The Big Lebowski">
-                <h3>The Big Lebowski</h3>
-                <button>Play</button>
-                <p>Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.</p>
-                <button>Détails</button>
+                <img id="best-movie-img" src="" alt="Best Movie">
+                <div class="movie-info">
+                    <h3 id="best-movie-title">Titre du film</h3>
+                    <p id="best-movie-summary">Résumé du film</p>
+                    <button id="best-movie-details-btn">Détails</button>
+                </div>
             </div>
         </section>
         <section id="top-rated-movies">
             <h2>Films les mieux notés</h2>
-            <div id="top-rated-movies-list">
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Titanic">
-                    <h3>Titanic</h3>
-                    <button>Détails</button>
-                </div>
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Retour vers le futur">
-                    <h3>Retour vers le futur</h3>
-                    <button>Détails</button>
-                </div>
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Scarface">
-                    <h3>Scarface</h3>
-                    <button>Détails</button>
-                </div>
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Pulp Fiction">
-                    <h3>Pulp Fiction</h3>
-                    <button>Détails</button>
-                </div>
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Le Parrain">
-                    <h3>Le Parrain</h3>
-                    <button>Détails</button>
-                </div>
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Alien">
-                    <h3>Alien</h3>
-                    <button>Détails</button>
-                </div>
-            </div>
+            <div id="top-rated-movies-list"></div>
+            <button class="show-more">Voir plus</button>
+        </section>
+        <section id="category-1">
+            <h2>Catégorie 1</h2>
+            <div id="category-1-list"></div>
+            <button class="show-more">Voir plus</button>
         </section>
         <section id="category-2">
             <h2>Catégorie 2</h2>
-            <div id="category-2-list">
-                <!-- Placeholder pour les films de catégorie 2 -->
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Film Catégorie 2">
-                    <h3>Titre du film Catégorie 2</h3>
-                    <button>Détails</button>
-                </div>
-            </div>
-        </section>
-        <section id="category-3">
-            <h2>Catégorie 3</h2>
-            <div id="category-3-list">
-                <!-- Placeholder pour les films de catégorie 3 -->
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Film Catégorie 3">
-                    <h3>Titre du film Catégorie 3</h3>
-                    <button>Détails</button>
-                </div>
-            </div>
+            <div id="category-2-list"></div>
+            <button class="show-more">Voir plus</button>
         </section>
         <section id="custom-category">
             <h2>Catégorie libre</h2>
-            <select id="category-select">
-                <option value="action">Films d'action</option>
-                <option value="comedy">Comédies</option>
-                <option value="family">Famille</option>
-                <option value="fantasy">Films de fantasy</option>
-                <option value="horror">Films d'horreur</option>
-                <option value="sci-fi">Science-fiction</option>
-                <option value="western">Westerns</option>
-            </select>
-            <div id="custom-category-list">
-                <!-- Placeholder pour les films de catégorie libre -->
-                <div class="movie-item">
-                    <img src="https://picsum.photos/150/225" alt="Film Catégorie libre">
-                    <h3>Titre du film Catégorie libre</h3>
-                    <button>Détails</button>
-                </div>
-            </div>
+            <select id="category-select"></select>
+            <div id="custom-category-list"></div>
+            <button class="show-more">Voir plus</button>
         </section>
     </main>
+    <footer>
+        <p>JustStreamIt &copy; 2024</p>
+    </footer>
+    <script src="js/app.js"></script>
 </body>
 </html>
