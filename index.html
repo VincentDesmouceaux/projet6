@@ -7,49 +7,51 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <header>
-        <img src="img/juststreamiy.png" alt="JustStreamIt Logo" class="logo">
-        <div class="header-text">
-            <h2>Vidéos à la demande</h2>
-        </div>
-    </header>
-    <main>
-        <section id="best-movie">
-            <h2>Meilleur film</h2>
-            <div id="best-movie-details">
-                <img id="best-movie-img" src="" alt="Best Movie">
-                <div class="movie-info">
-                    <h3 id="best-movie-title">Titre du film</h3>
-                    <p id="best-movie-summary">Résumé du film</p>
-                    <button id="best-movie-details-btn">Détails</button>
-                </div>
+    <div class="container">
+        <header>
+            <img src="img/juststreamiy.png" alt="JustStreamIt Logo" class="logo">
+            <div class="header-text">
+                <h2>Vidéos à la demande</h2>
             </div>
-        </section>
-        <section id="top-rated-movies">
-            <h2>Films les mieux notés</h2>
-            <div id="top-rated-movies-list"></div>
-            <button class="show-more">Voir plus</button>
-        </section>
-        <section id="category-1">
-            <h2>Catégorie 1</h2>
-            <div id="category-1-list"></div>
-            <button class="show-more">Voir plus</button>
-        </section>
-        <section id="category-2">
-            <h2>Catégorie 2</h2>
-            <div id="category-2-list"></div>
-            <button class="show-more">Voir plus</button>
-        </section>
-        <section id="custom-category">
-            <h2>Catégorie libre</h2>
-            <select id="category-select"></select>
-            <div id="custom-category-list"></div>
-            <button class="show-more">Voir plus</button>
-        </section>
-    </main>
-    <footer>
-        <p>JustStreamIt &copy; 2024</p>
-    </footer>
+        </header>
+        <main>
+            <section id="best-movie">
+                <h2>Meilleur film</h2>
+                <div id="best-movie-details">
+                    <img id="best-movie-img" src="https://m.media-amazon.com/images/M/MV5BNDEyYTA5OWEtYjNiYS00MGZlLThjYzEtMTc1Zjk2NDRmZmYxXkEyXkFqcGdeQXVyNzIwNTQyMw@@._V1_UY268_CR1,0,182,268_AL_.jpg" alt="Best Movie">
+                    <div class="movie-info">
+                        <h3 id="best-movie-title">Hopeful Notes</h3>
+                        <p id="best-movie-summary">A young violinist with leukemia brings hope and life into a desolate Russian hospital for children.</p>
+                        <button id="best-movie-details-btn" data-id="1508669">Détails</button>
+                    </div>
+                </div>
+            </section>
+            <section id="top-rated-movies">
+                <h2>Films les mieux notés</h2>
+                <div id="top-rated-movies-list"></div>
+                <button class="show-more">Voir plus</button>
+            </section>
+            <section id="category-1">
+                <h2>Catégorie 1</h2>
+                <div id="category-1-list"></div>
+                <button class="show-more">Voir plus</button>
+            </section>
+            <section id="category-2">
+                <h2>Catégorie 2</h2>
+                <div id="category-2-list"></div>
+                <button class="show-more">Voir plus</button>
+            </section>
+            <section id="custom-category">
+                <h2>Catégorie libre</h2>
+                <select id="category-select"></select>
+                <div id="custom-category-list"></div>
+                <button class="show-more">Voir plus</button>
+            </section>
+        </main>
+        <footer>
+            <p>JustStreamIt &copy; 2024</p>
+        </footer>
+    </div>
     <script src="js/app.js"></script>
 </body>
 </html>

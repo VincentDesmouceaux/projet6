@@ -18,6 +18,9 @@ $best-movie-font-size: 48px;
 $best-movie-font-weight: 600;
 $best-movie-line-height: 71.14px;
 $details-button-bg: #FA0B0B;
+$content-padding: 0 20px; /* Padding pour les marges latérales */
+$section-margin: 40px auto; /* Marge pour les sections */
+$max-content-width: 1200px; /* Largeur maximale pour le contenu */
 
 /* Mixins */
 @mixin flex-center {
@@ -52,17 +55,25 @@ body {
   border: 1px solid #000000;
 }
 
+.container {
+  width: 100%;
+  max-width: $max-content-width;
+  padding: $content-padding;
+  margin: 0 auto;
+  box-sizing: border-box; /* Pour inclure le padding dans la largeur totale */
+}
+
 header {
   background-color: $header-bg-color;
-  width: 837px;
   height: $header-height;
-  margin: 20px auto;
-  border: 1px solid #000000;
   display: flex;
   align-items: center;
   padding: 0 20px;
   gap: 20px;
-  opacity: 1;
+  border: 1px solid #000000;
+  width: 100%;
+  max-width: $max-content-width;
+  margin: $section-margin;
 
   .logo {
     width: 127px;
@@ -86,12 +97,13 @@ header {
 }
 
 main {
-  width: 80%;
-  margin: 20px 0;
+  width: 100%;
+  max-width: $max-content-width;
+  margin: $section-margin;
 }
 
 section {
-  margin-bottom: 20px;
+  margin: $section-margin;
 }
 
 h2 {
@@ -100,10 +112,12 @@ h2 {
 }
 
 #best-movie {
+  width: 100%;
+  max-width: $max-content-width;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
 
   h2 {
     font-family: $header-font-family;
