@@ -1,4 +1,4 @@
-/* Variables */
+/* Global styles and variables */
 $primary-color: #333;
 $secondary-color: #f0f0f0;
 $header-bg-color: #61787F;
@@ -17,10 +17,11 @@ $text-color-black: #000000;
 $best-movie-font-size: 48px;
 $best-movie-font-weight: 600;
 $best-movie-line-height: 71.14px;
-$details-button-bg: #FA0B0B;
-$content-padding: 0 20px; /* Padding pour les marges latérales */
-$section-margin: 40px auto; /* Marge pour les sections */
-$max-content-width: 1200px; /* Largeur maximale pour le contenu */
+$details-button-bg: #4f4f4f; /* Gris foncé */
+$overlay-bg: rgba(0, 0, 0, 0.7);
+$content-padding: 0 20px;
+$section-margin: 40px auto;
+$max-content-width: 1200px;
 
 /* Mixins */
 @mixin flex-center {
@@ -60,7 +61,7 @@ body {
   max-width: $max-content-width;
   padding: $content-padding;
   margin: 0 auto;
-  box-sizing: border-box; /* Pour inclure le padding dans la largeur totale */
+  box-sizing: border-box;
 }
 
 header {
@@ -106,9 +107,16 @@ section {
   margin: $section-margin;
 }
 
-h2 {
+.section-title {
+  font-family: $header-font-family;
+  font-size: $best-movie-font-size;
+  font-weight: $best-movie-font-weight;
+  line-height: $best-movie-line-height;
+  color: $text-color-black;
+  margin: 0;
+  padding: 0;
+  text-align: left;
   padding-bottom: 10px;
-  text-align: center;
 }
 
 #best-movie {
@@ -120,14 +128,7 @@ h2 {
   align-items: flex-start;
 
   h2 {
-    font-family: $header-font-family;
-    font-size: $best-movie-font-size;
-    font-weight: $best-movie-font-weight;
-    line-height: $best-movie-line-height;
-    color: $text-color-black;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    @extend .section-title;
   }
 
   #best-movie-details {
@@ -177,7 +178,7 @@ h2 {
       }
 
       #best-movie-details-btn {
-        background-color: $details-button-bg;
+        background-color: red; /* Red color for the best movie details button */
         color: white;
         padding: 2px 4px;
         border: none;
@@ -185,11 +186,10 @@ h2 {
         width: $button-width;
         height: $button-height;
         border-radius: $button-radius;
-        gap: 10px;
         align-self: flex-end;
 
         &:hover {
-          background-color: $hover-color;
+          background-color: darkred;
         }
       }
     }
@@ -198,25 +198,83 @@ h2 {
   }
 }
 
+.details-btn {
+  background-color: $details-button-bg; /* Default color for other details buttons */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: $button-radius;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
 #category-select {
   margin: 10px;
   padding: 5px;
 }
 
-#top-rated-movies-list {
+#top-rated-movies {
+  width: 100%;
+  max-width: $max-content-width;
+  margin: 0 auto;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
 
-  .movie-item {
-    @include responsive(display, block, none, none);
+  h2 {
+    @extend .section-title;
+  }
 
-    &:nth-child(-n+4) {
-      @include responsive(display, block, block, none);
-    }
+  #top-rated-movies-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    &:nth-child(-n+2) {
-      @include responsive(display, block, block, block);
+    .movie-item {
+      position: relative;
+      margin: 10px;
+      text-align: center;
+
+      img {
+        width: 252px;
+        height: 252px;
+        object-fit: cover;
+      }
+
+      h3 {
+        position: absolute;
+        top: 66%;
+        left: 50%;
+        transform: translate(-50%, -66%);
+        width: 100%;
+        background-color: $overlay-bg;
+        color: $text-color-white;
+        padding: 10px;
+        margin: 0;
+        text-align: center;
+        font-family: $header-font-family;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .details-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: $details-button-bg;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: $button-radius;
+
+        &:hover {
+          background-color: $hover-color;
+        }
+      }
     }
   }
 }

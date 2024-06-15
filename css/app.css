@@ -1,8 +1,6 @@
 @charset "UTF-8";
-/* Variables */
-/* Padding pour les marges latérales */
-/* Marge pour les sections */
-/* Largeur maximale pour le contenu */
+/* Global styles and variables */
+/* Gris foncé */
 /* Mixins */
 /* Global styles */
 body {
@@ -23,7 +21,7 @@ body {
   max-width: 1200px;
   padding: 0 20px;
   margin: 0 auto;
-  box-sizing: border-box; /* Pour inclure le padding dans la largeur totale */
+  box-sizing: border-box;
 }
 
 header {
@@ -66,9 +64,16 @@ section {
   margin: 40px auto;
 }
 
-h2 {
+.section-title, #top-rated-movies h2, #best-movie h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 71.14px;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  text-align: left;
   padding-bottom: 10px;
-  text-align: center;
 }
 
 #best-movie {
@@ -78,16 +83,6 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-#best-movie h2 {
-  font-family: "Oswald", sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  line-height: 71.14px;
-  color: #000000;
-  margin: 0;
-  padding: 0;
-  text-align: left;
 }
 #best-movie #best-movie-details {
   display: flex;
@@ -143,7 +138,7 @@ h2 {
   text-align: left;
 }
 #best-movie #best-movie-details .movie-info #best-movie-details-btn {
-  background-color: #FA0B0B;
+  background-color: red; /* Red color for the best movie details button */
   color: white;
   padding: 2px 4px;
   border: none;
@@ -151,11 +146,10 @@ h2 {
   width: 166px;
   height: 68px;
   border-radius: 25px;
-  gap: 10px;
   align-self: flex-end;
 }
 #best-movie #best-movie-details .movie-info #best-movie-details-btn:hover {
-  background-color: #555;
+  background-color: darkred;
 }
 @media (max-width: 768px) {
   #best-movie #best-movie-details {
@@ -166,6 +160,18 @@ h2 {
   #best-movie #best-movie-details {
     flex-direction: column;
   }
+}
+
+.details-btn {
+  background-color: #4f4f4f; /* Default color for other details buttons */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+.details-btn:hover {
+  background-color: #555;
 }
 
 #category-select {
@@ -173,49 +179,57 @@ h2 {
   padding: 5px;
 }
 
-#top-rated-movies-list {
+#top-rated-movies {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#top-rated-movies #top-rated-movies-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-#top-rated-movies-list .movie-item {
-  display: block;
+#top-rated-movies #top-rated-movies-list .movie-item {
+  position: relative;
+  margin: 10px;
+  text-align: center;
 }
-@media (max-width: 768px) {
-  #top-rated-movies-list .movie-item {
-    display: none;
-  }
+#top-rated-movies #top-rated-movies-list .movie-item img {
+  width: 252px;
+  height: 252px;
+  object-fit: cover;
 }
-@media (max-width: 480px) {
-  #top-rated-movies-list .movie-item {
-    display: none;
-  }
+#top-rated-movies #top-rated-movies-list .movie-item h3 {
+  position: absolute;
+  top: 66%;
+  left: 50%;
+  transform: translate(-50%, -66%);
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FFFFFF;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
 }
-#top-rated-movies-list .movie-item:nth-child(-n+4) {
-  display: block;
+#top-rated-movies #top-rated-movies-list .movie-item .details-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #4f4f4f;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
 }
-@media (max-width: 768px) {
-  #top-rated-movies-list .movie-item:nth-child(-n+4) {
-    display: block;
-  }
-}
-@media (max-width: 480px) {
-  #top-rated-movies-list .movie-item:nth-child(-n+4) {
-    display: none;
-  }
-}
-#top-rated-movies-list .movie-item:nth-child(-n+2) {
-  display: block;
-}
-@media (max-width: 768px) {
-  #top-rated-movies-list .movie-item:nth-child(-n+2) {
-    display: block;
-  }
-}
-@media (max-width: 480px) {
-  #top-rated-movies-list .movie-item:nth-child(-n+2) {
-    display: block;
-  }
+#top-rated-movies #top-rated-movies-list .movie-item .details-btn:hover {
+  background-color: #555;
 }
 
 @media (max-width: 768px) {
