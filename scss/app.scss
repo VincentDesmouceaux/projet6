@@ -1,12 +1,23 @@
 /* Variables */
 $primary-color: #333;
 $secondary-color: #f0f0f0;
+$header-bg-color: #61787F;
 $header-height: 122px;
 $button-height: 68px;
 $button-width: 166px;
-$button-radius: 25px 0 0 0;
+$button-radius: 25px;
 $font-family: Arial, sans-serif;
+$header-font-family: 'Oswald', sans-serif;
+$header-font-size: 40px;
+$header-font-weight: 300;
 $hover-color: #555;
+$background-color: #FFFFFF;
+$text-color-white: #FFFFFF;
+$text-color-black: #000000;
+$best-movie-font-size: 48px;
+$best-movie-font-weight: 600;
+$best-movie-line-height: 71.14px;
+$details-button-bg: #FA0B0B;
 
 /* Mixins */
 @mixin flex-center {
@@ -37,27 +48,40 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--layout-surface-background, $background-color);
+  border: 1px solid #000000;
 }
 
 header {
-  background-color: $primary-color;
-  color: white;
+  background-color: $header-bg-color;
   width: 837px;
   height: $header-height;
   margin: 20px auto;
-  border: 1px solid transparent;
-  opacity: 1;
-  @include flex-center;
-  justify-content: space-between;
+  border: 1px solid #000000;
+  display: flex;
+  align-items: center;
   padding: 0 20px;
+  gap: 20px;
+  opacity: 1;
 
   .logo {
-    height: 80px;
+    width: 127px;
+    height: 94px;
   }
 
   .header-text {
-    text-align: center;
     flex-grow: 1;
+    color: $text-color-white;
+
+    h2 {
+      font-family: $header-font-family;
+      font-size: $header-font-size;
+      font-weight: $header-font-weight;
+      line-height: 59.28px;
+      margin: 0;
+      text-align: left;
+      color: $text-color-white;
+    }
   }
 }
 
@@ -71,7 +95,6 @@ section {
 }
 
 h2 {
-  border-bottom: 2px solid $primary-color;
   padding-bottom: 10px;
   text-align: center;
 }
@@ -79,14 +102,25 @@ h2 {
 #best-movie {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+
+  h2 {
+    font-family: $header-font-family;
+    font-size: $best-movie-font-size;
+    font-weight: $best-movie-font-weight;
+    line-height: $best-movie-line-height;
+    color: $text-color-black;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
 
   #best-movie-details {
     display: flex;
     width: 100%;
     padding: 20px;
-    border: 1px solid $primary-color;
+    border: 6px solid $text-color-black;
     background-color: #fff;
     margin-top: 20px;
 
@@ -105,19 +139,31 @@ h2 {
       flex: 1;
 
       #best-movie-title {
-        font-size: 24px;
+        font-family: $header-font-family;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 71.14px;
+        color: $text-color-black;
         margin: 0;
-
-        @include responsive(font-size, 24px, 20px, 18px);
-        @include responsive(margin-bottom, 0, 10px, 10px);
+        width: 463px;
+        height: 44px;
+        text-align: left;
       }
 
       #best-movie-summary {
+        font-family: $header-font-family;
+        font-size: 28px;
+        font-weight: 200;
+        line-height: 41.5px;
+        color: $text-color-black;
         margin: 10px 0;
+        width: 501px;
+        height: 113px;
+        text-align: left;
       }
 
       #best-movie-details-btn {
-        background-color: red;
+        background-color: $details-button-bg;
         color: white;
         padding: 2px 4px;
         border: none;
@@ -125,6 +171,7 @@ h2 {
         width: $button-width;
         height: $button-height;
         border-radius: $button-radius;
+        gap: 10px;
         align-self: flex-end;
 
         &:hover {
