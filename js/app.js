@@ -76,10 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const movieElement = document.createElement('div');
             movieElement.classList.add('movie-item');
             movieElement.innerHTML = `
-                <img src="${movie.image_url}" alt="${movie.title}">
+            <img src="${movie.image_url}" alt="${movie.title}">
+            <div class="movie-overlay">
                 <h3>${movie.title}</h3>
                 <button data-id="${movie.id}" class="details-btn">Détails</button>
-            `;
+            </div>
+        `;
             container.appendChild(movieElement);
         });
     }

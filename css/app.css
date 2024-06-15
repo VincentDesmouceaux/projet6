@@ -13,7 +13,6 @@ body {
   flex-direction: column;
   align-items: center;
   background: var(--layout-surface-background, #FFFFFF);
-  border: 1px solid #000000;
 }
 
 .container {
@@ -31,10 +30,9 @@ header {
   align-items: center;
   padding: 0 20px;
   gap: 20px;
-  border: 1px solid #000000;
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 80px auto auto;
 }
 header .logo {
   width: 127px;
@@ -57,11 +55,11 @@ header .header-text h2 {
 main {
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 80px auto auto;
 }
 
 section {
-  margin: 40px auto;
+  margin: 80px auto;
 }
 
 .section-title, #top-rated-movies h2, #best-movie h2 {
@@ -174,6 +172,58 @@ section {
   background-color: #555;
 }
 
+.movie-item {
+  position: relative;
+  margin: 10px;
+  text-align: center;
+}
+
+.movie-item img {
+  width: 252px;
+  height: 252px;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  top: 30%; /* Adjust this value to place the overlay higher */
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black opaque background */
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 40%; /* Increase height to make the overlay more spacious */
+}
+
+.movie-overlay h3 {
+  margin: 0 0 10px 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 16px; /* Smaller font size */
+  font-weight: normal; /* Non-bold text */
+}
+
+.movie-overlay .details-btn {
+  background-color: #4f4f4f;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.movie-overlay .details-btn:hover {
+  background-color: #555;
+}
+
 #category-select {
   margin: 10px;
   padding: 5px;
@@ -191,45 +241,6 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-#top-rated-movies #top-rated-movies-list .movie-item {
-  position: relative;
-  margin: 10px;
-  text-align: center;
-}
-#top-rated-movies #top-rated-movies-list .movie-item img {
-  width: 252px;
-  height: 252px;
-  object-fit: cover;
-}
-#top-rated-movies #top-rated-movies-list .movie-item h3 {
-  position: absolute;
-  top: 66%;
-  left: 50%;
-  transform: translate(-50%, -66%);
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #FFFFFF;
-  padding: 10px;
-  margin: 0;
-  text-align: center;
-  font-family: "Oswald", sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-}
-#top-rated-movies #top-rated-movies-list .movie-item .details-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #4f4f4f;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 25px;
-}
-#top-rated-movies #top-rated-movies-list .movie-item .details-btn:hover {
-  background-color: #555;
 }
 
 @media (max-width: 768px) {

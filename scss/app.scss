@@ -20,7 +20,7 @@ $best-movie-line-height: 71.14px;
 $details-button-bg: #4f4f4f; /* Gris foncé */
 $overlay-bg: rgba(0, 0, 0, 0.7);
 $content-padding: 0 20px;
-$section-margin: 40px auto;
+$section-margin: 80px auto;
 $max-content-width: 1200px;
 
 /* Mixins */
@@ -53,7 +53,6 @@ body {
   flex-direction: column;
   align-items: center;
   background: var(--layout-surface-background, $background-color);
-  border: 1px solid #000000;
 }
 
 .container {
@@ -71,10 +70,9 @@ header {
   align-items: center;
   padding: 0 20px;
   gap: 20px;
-  border: 1px solid #000000;
   width: 100%;
   max-width: $max-content-width;
-  margin: $section-margin;
+  margin: $section-margin auto;
 
   .logo {
     width: 127px;
@@ -100,7 +98,7 @@ header {
 main {
   width: 100%;
   max-width: $max-content-width;
-  margin: $section-margin;
+  margin: $section-margin auto;
 }
 
 section {
@@ -211,6 +209,59 @@ section {
   }
 }
 
+.movie-item {
+  position: relative;
+  margin: 10px;
+  text-align: center;
+}
+
+.movie-item img {
+  width: 252px;
+  height: 252px;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  top: 30%; /* Adjust this value to place the overlay higher */
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black opaque background */
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 40%; /* Increase height to make the overlay more spacious */
+}
+
+.movie-overlay h3 {
+  margin: 0 0 10px 0;
+  font-family: $header-font-family;
+  font-size: 16px; /* Smaller font size */
+  font-weight: normal; /* Non-bold text */
+}
+
+.movie-overlay .details-btn {
+  background-color: $details-button-bg;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: $button-radius;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
 #category-select {
   margin: 10px;
   padding: 5px;
@@ -232,50 +283,6 @@ section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
-    .movie-item {
-      position: relative;
-      margin: 10px;
-      text-align: center;
-
-      img {
-        width: 252px;
-        height: 252px;
-        object-fit: cover;
-      }
-
-      h3 {
-        position: absolute;
-        top: 66%;
-        left: 50%;
-        transform: translate(-50%, -66%);
-        width: 100%;
-        background-color: $overlay-bg;
-        color: $text-color-white;
-        padding: 10px;
-        margin: 0;
-        text-align: center;
-        font-family: $header-font-family;
-        font-size: 24px;
-        font-weight: 600;
-      }
-
-      .details-btn {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        background-color: $details-button-bg;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-        border-radius: $button-radius;
-
-        &:hover {
-          background-color: $hover-color;
-        }
-      }
-    }
   }
 }
 
