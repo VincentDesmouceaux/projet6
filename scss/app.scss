@@ -1,0 +1,205 @@
+/* Variables */
+$primary-color: #333;
+$secondary-color: #f0f0f0;
+$header-height: 122px;
+$button-height: 68px;
+$button-width: 166px;
+$button-radius: 25px 0 0 0;
+$font-family: Arial, sans-serif;
+$hover-color: #555;
+
+/* Mixins */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin responsive($property, $desktop, $tablet, $mobile) {
+  #{$property}: $desktop;
+
+  @media (max-width: 768px) {
+    #{$property}: $tablet;
+  }
+
+  @media (max-width: 480px) {
+    #{$property}: $mobile;
+  }
+}
+
+/* Global styles */
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  background-color: $secondary-color;
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background-color: $primary-color;
+  color: white;
+  width: 837px;
+  height: $header-height;
+  margin: 20px auto;
+  border: 1px solid transparent;
+  opacity: 1;
+  @include flex-center;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  .logo {
+    height: 80px;
+  }
+
+  .header-text {
+    text-align: center;
+    flex-grow: 1;
+  }
+}
+
+main {
+  width: 80%;
+  margin: 20px 0;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  border-bottom: 2px solid $primary-color;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#best-movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  #best-movie-details {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid $primary-color;
+    background-color: #fff;
+    margin-top: 20px;
+
+    #best-movie-img {
+      width: 227px;
+      height: 334px;
+      margin-right: 20px;
+
+      @include responsive(margin-right, 20px, 0, 0);
+    }
+
+    .movie-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+
+      #best-movie-title {
+        font-size: 24px;
+        margin: 0;
+
+        @include responsive(font-size, 24px, 20px, 18px);
+        @include responsive(margin-bottom, 0, 10px, 10px);
+      }
+
+      #best-movie-summary {
+        margin: 10px 0;
+      }
+
+      #best-movie-details-btn {
+        background-color: red;
+        color: white;
+        padding: 2px 4px;
+        border: none;
+        cursor: pointer;
+        width: $button-width;
+        height: $button-height;
+        border-radius: $button-radius;
+        align-self: flex-end;
+
+        &:hover {
+          background-color: $hover-color;
+        }
+      }
+    }
+
+    @include responsive(flex-direction, row, column, column);
+  }
+}
+
+#category-select {
+  margin: 10px;
+  padding: 5px;
+}
+
+#top-rated-movies-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .movie-item {
+    @include responsive(display, block, none, none);
+
+    &:nth-child(-n+4) {
+      @include responsive(display, block, block, none);
+    }
+
+    &:nth-child(-n+2) {
+      @include responsive(display, block, block, block);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #top-rated-movies-list .movie-item,
+  #category-1-list .movie-item,
+  #category-2-list .movie-item,
+  #custom-category-list .movie-item {
+    display: none;
+  }
+
+  #top-rated-movies-list .movie-item:nth-child(-n+4),
+  #category-1-list .movie-item:nth-child(-n+4),
+  #category-2-list .movie-item:nth-child(-n+4),
+  #custom-category-list .movie-item:nth-child(-n+4) {
+    display: block;
+  }
+
+  #best-movie-details {
+    flex-direction: column;
+  }
+
+  #best-movie-img {
+    margin: 0 0 10px 0;
+  }
+
+  #best-movie-title {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #top-rated-movies-list .movie-item,
+  #category-1-list .movie-item,
+  #category-2-list .movie-item,
+  #custom-category-list .movie-item {
+    display: none;
+  }
+
+  #top-rated-movies-list .movie-item:nth-child(-n+2),
+  #category-1-list .movie-item:nth-child(-n+2),
+  #category-2-list .movie-item:nth-child(-n+2),
+  #custom-category-list .movie-item:nth-child(-n+2) {
+    display: block;
+  }
+}
