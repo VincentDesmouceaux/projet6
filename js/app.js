@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiBaseURL = 'http://127.0.0.1:8000/api/v1/titles/';
     const genresURL = 'http://127.0.0.1:8000/api/v1/genres/';
 
+    const state = {
+        'top-rated-movies-list': { page1: 1, page2: 2 },
+        'category-1-list': { page1: 1, page2: 2 },
+        'category-2-list': { page1: 1, page2: 2 },
+        'custom-category-list': { page1: 1, page2: 2 }
+    };
+
     // Fetch and display the best movie
     const bestFilmsUrl = `${apiBaseURL}?sort_by=-imdb_score&limit=1`;
     fetchAndDisplayBestMovie(bestFilmsUrl);
@@ -21,17 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch and display custom category movies based on user selection
     document.getElementById('category-select').addEventListener('change', (event) => {
         const selectedGenre = event.target.value;
+        state['custom-category-list'] = { page1: 1, page2: 2 };  // Reset page state for custom category
         initMoviesWithPagination(`${apiBaseURL}?genre=${selectedGenre}&sort_by=-imdb_score&limit=5`, 'custom-category-list', 6);
     });
 
     async function fetchAndDisplayBestMovie(url) {
         try {
-            console.log(`Fetching best movie from: ${url}`);
             const response = await fetch(url);
             const data = await response.json();
             const movie = data.results[0];
             const theBestFilmDetailUrl = `${apiBaseURL}${movie.id}`;
-            console.log(`Fetching details for best movie from: ${theBestFilmDetailUrl}`);
             const detailResponse = await fetch(theBestFilmDetailUrl);
             const detailData = await detailResponse.json();
             const isValid = await validateImage(movie.image_url);
@@ -40,9 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('best-movie-title').textContent = movie.title;
                 document.getElementById('best-movie-summary').textContent = detailData.description;
                 document.getElementById('best-movie-details-btn').dataset.id = movie.id;
-                console.log(`Best movie displayed: ${movie.title}`);
-            } else {
-                console.warn(`Image not found for the best movie: ${movie.title}`);
             }
         } catch (error) {
             console.error('Error fetching the best movie:', error);
@@ -50,23 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initMoviesWithPagination(url, elementId, limit) {
-        let page = 1;
-        let displayedMovies = 0;
         const container = document.getElementById(elementId);
 
-        async function fetchMoreMovies(reset = false) {
+        async function fetchMovies(reset = false) {
             if (reset) {
-                page = 1;
-                displayedMovies = 0;
+                state[elementId] = { page1: 1, page2: 2 };
                 container.innerHTML = '';
             }
 
+            let { page1, page2 } = state[elementId];
+            console.log(`Backend page numbers: ${page1}, ${page2}`); // Log the page numbers
+
+            let displayedMovies = 0;
             try {
-                while (displayedMovies < limit) {
-                    console.log(`Fetching movies for ${elementId} from: ${url}&page=${page}`);
+                for (const page of [page1, page2]) {
                     const response = await fetch(`${url}&page=${page}`);
                     const data = await response.json();
-                    console.log(`Fetched data for ${elementId}:`, data);
 
                     for (const movie of data.results) {
                         if (displayedMovies >= limit) break;
@@ -75,36 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (isValid) {
                             displayMovie(movie, elementId);
                             displayedMovies++;
-                            console.log(`Displayed movie: ${movie.title}`);
-                        } else {
-                            console.warn(`Image not found for movie: ${movie.title}`);
                         }
                     }
 
                     if (!data.next) break; // Exit if there are no more pages
-                    page++;
                 }
+                state[elementId].page1 += 2;
+                state[elementId].page2 += 2; // Update the page state
             } catch (error) {
                 console.error(`Error fetching movies for ${elementId}:`, error);
             }
         }
 
         // Initial fetch
-        fetchMoreMovies();
+        fetchMovies(true);
 
         // Add event listener for the "Voir plus" button
         const showMoreBtn = document.querySelector(`#${elementId}`).nextElementSibling;
         showMoreBtn.addEventListener('click', async () => {
             console.log(`"Voir plus" clicked for ${elementId}`);
-            page++;
-            displayedMovies = 0;
-            await fetchMoreMovies();
+            await fetchMovies();
         });
     }
 
     async function fetchGenres(url) {
         try {
-            console.log(`Fetching genres from: ${url}`);
             const response = await fetch(url);
             const data = await response.json();
             const categorySelect = document.getElementById('category-select');
@@ -114,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = genre.name;
                 categorySelect.appendChild(option);
             });
-            console.log('Genres fetched and dropdown updated.');
         } catch (error) {
             console.error('Error fetching genres:', error);
         }
@@ -148,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('details-btn')) {
             const movieId = event.target.dataset.id;
             try {
-                console.log(`Fetching details for movie ID: ${movieId}`);
                 const response = await fetch(`${apiBaseURL}${movieId}`);
                 const movie = await response.json();
                 // Display movie details in a modal
@@ -182,7 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Handle error for modal image
                 const modalImg = modalContainer.querySelector('img');
                 modalImg.addEventListener('error', () => {
-                    console.warn(`Image not found for movie: ${movie.title}`);
                     modalImg.style.display = 'none'; // Hide the image element if it fails to load
                 });
             } catch (error) {
