@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         async function fetchMovies(reset = false) {
             if (reset) {
                 state[elementId] = { page1: 1, page2: 2 };
-                container.innerHTML = '';
             }
 
             let { page1, page2 } = state[elementId];
@@ -66,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let displayedMovies = 0;
             try {
+                container.innerHTML = '';  // Clear the container before fetching new movies
+
                 for (const page of [page1, page2]) {
                     const response = await fetch(`${url}&page=${page}`);
                     const data = await response.json();
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const showMoreBtn = document.querySelector(`#${elementId}`).nextElementSibling;
         showMoreBtn.addEventListener('click', async () => {
             console.log(`"Voir plus" clicked for ${elementId}`);
-            await fetchMovies();
+            await fetchMovies(); // Reset container before fetching new movies
         });
     }
 
