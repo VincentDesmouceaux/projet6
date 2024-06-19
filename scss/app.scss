@@ -22,6 +22,9 @@ $overlay-bg: rgba(0, 0, 0, 0.7);
 $content-padding: 0 20px;
 $section-margin: 40px auto;
 $max-content-width: 1200px;
+$more-button-bg: #61787F;
+$more-button-hover-bg: #4f4f4f;
+$more-button-text-color: #FFFFFF;
 
 /* Mixins */
 @mixin flex-center {
@@ -74,7 +77,7 @@ header {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: 100px; /* Added margin-top */
+  margin-top: 20px; /* Added margin-top */
 
   .logo {
     width: 127px;
@@ -142,7 +145,7 @@ section {
 
     #best-movie-img {
       width: 227px;
-      height: 334px;
+      height: 334px; /* Set height to make the image taller */
       margin-right: 20px;
 
       @include responsive(margin-right, 20px, 0, 0);
@@ -189,6 +192,7 @@ section {
         height: $button-height;
         border-radius: $button-radius;
         align-self: flex-end;
+        font-size: 20px; /* Increased font size */
 
         &:hover {
           background-color: darkred;
@@ -203,10 +207,11 @@ section {
 .details-btn {
   background-color: $details-button-bg; /* Default color for other details buttons */
   color: white;
-  padding: 5px 10px;
+  padding: 10px 15px; /* Increased padding for better ergonomics */
   border: none;
   cursor: pointer;
   border-radius: $button-radius;
+  font-size: 18px; /* Increased font size */
 
   &:hover {
     background-color: $hover-color;
@@ -219,49 +224,53 @@ section {
   text-align: center;
   flex: 0 0 calc(33.333% - 20px); /* 3 items per row */
   box-sizing: border-box;
+  height: 0;
+  padding-bottom: 33.333%; /* Maintain square aspect ratio */
 }
 
 .movie-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .movie-overlay {
   position: absolute;
-  top: 30%; /* Adjust this value to place the overlay higher */
+  bottom: 200px; /* Align to the bottom */
   left: 0;
   width: 100%;
+  height: 40%; /* Cover 2/3 of the image */
   background-color: rgba(0, 0, 0, 0.5); /* Black opaque background */
   color: white;
   padding: 15px;
   box-sizing: border-box;
-  transform: translateY(-50%);
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 40%; /* Increase height to make the overlay more spacious */
 }
 
 .movie-overlay h3 {
   margin: 0 0 10px 0;
   font-family: $header-font-family;
-  font-size: 16px; /* Smaller font size */
+  font-size: 24px; /* Increased font size */
   font-weight: normal; /* Non-bold text */
 }
 
 .movie-overlay .details-btn {
   background-color: $details-button-bg;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 15px; /* Increased padding */
   border: none;
   cursor: pointer;
   border-radius: $button-radius;
+  font-size: 18px; /* Increased font size */
   align-self: flex-end;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  position: relative; /* Align relative to the overlay */
+  margin-top: auto; /* Push the button to the bottom */
 
   &:hover {
     background-color: $hover-color;
@@ -278,6 +287,25 @@ section {
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 40px; /* Added margin-top for extra spacing */
+}
+
+.show-more {
+  display: block;
+  background-color: $more-button-bg; /* Styled for more button */
+  color: $more-button-text-color;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: $button-radius;
+  font-family: $header-font-family;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px auto; /* Centered the button */
+  text-align: center;
+
+  &:hover {
+    background-color: $more-button-hover-bg;
+  }
 }
 
 @media (max-width: 768px) {
