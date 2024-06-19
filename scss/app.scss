@@ -2,13 +2,14 @@
 $primary-color: #333;
 $secondary-color: #f0f0f0;
 $header-bg-color: #61787F;
-$header-height: 122px;
+$header-height: 150px; /* Increased height */
+$logo-height: 120px; /* Adjusted logo height */
 $button-height: 68px;
 $button-width: 166px;
 $button-radius: 25px;
 $font-family: Arial, sans-serif;
 $header-font-family: 'Oswald', sans-serif;
-$header-font-size: 40px;
+$header-font-size: 48px; /* Adjusted font size */
 $header-font-weight: 300;
 $hover-color: #555;
 $background-color: #FFFFFF;
@@ -69,7 +70,7 @@ body {
 
 header {
   background-color: $header-bg-color;
-  height: $header-height;
+  height: $header-height; /* Updated height */
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -77,11 +78,11 @@ header {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: 20px; /* Added margin-top */
+  margin-top: 100px; /* Added margin-top */
 
   .logo {
-    width: 127px;
-    height: 94px;
+    width: auto;
+    height: $logo-height; /* Updated logo height */
   }
 
   .header-text {
@@ -90,7 +91,7 @@ header {
 
     h2 {
       font-family: $header-font-family;
-      font-size: $header-font-size;
+      font-size: $header-font-size; /* Updated font size */
       font-weight: $header-font-weight;
       line-height: 59.28px;
       margin: 0;
@@ -289,10 +290,10 @@ section {
 
 #category-select {
   width: 404px;
-  height: 58.43px;
+  height: 78.43px;
   margin: 0 10px;
   padding: 5px;
-  border: 2px solid $primary-color;
+  border: 1px solid $primary-color;
   opacity: 1;
   font-family: "Oswald", sans-serif;
   font-size: 24px;
@@ -304,7 +305,7 @@ section {
   padding: 10px;
   font-family: "Oswald", sans-serif;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: normal;
   height: 40px;
 }
 
