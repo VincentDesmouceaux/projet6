@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'top-rated-movies-list': { page1: 1, page2: 2 },
         'category-1-list': { page1: 1, page2: 2 },
         'category-2-list': { page1: 1, page2: 2 },
-        'custom-category-list': { page1: 1, page2: 2 }
+        'custom-category-list': { page1: 1, page2: 2 },
+        'genres': { page: 1 }
     };
 
     // Fetch and display the best movie
@@ -102,19 +103,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchGenres(url) {
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const categorySelect = document.getElementById('category-select');
-            data.results.forEach(genre => {
-                const option = document.createElement('option');
-                option.value = genre.name;
-                option.textContent = genre.name;
-                categorySelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching genres:', error);
+        const categorySelect = document.getElementById('category-select');
+        categorySelect.innerHTML = '';  // Clear existing options
+
+        async function fetchAllGenres(page = 1) {
+            try {
+                const response = await fetch(`${url}?page=${page}`);
+                const data = await response.json();
+                data.results.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre.name;
+                    option.textContent = genre.name;
+                    categorySelect.appendChild(option);
+                });
+
+                if (data.next) {
+                    await fetchAllGenres(page + 1);
+                }
+            } catch (error) {
+                console.error('Error fetching genres:', error);
+            }
         }
+
+        fetchAllGenres();
     }
 
     async function validateImage(url) {
