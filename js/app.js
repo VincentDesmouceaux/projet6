@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'genres': { page: 1 }
     };
 
+    const container = document.querySelector('.container');
+
     // Fetch and display the best movie
     const bestFilmsUrl = `${apiBaseURL}?sort_by=-imdb_score&limit=1`;
     fetchAndDisplayBestMovie(bestFilmsUrl);
@@ -158,36 +160,47 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch(`${apiBaseURL}${movieId}`);
                 const movie = await response.json();
-                // Display movie details in a modal
+
+                // Remove existing modal if it exists
+                const existingModal = document.querySelector('.modal-wrapper');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+
+                // Create and display the modal
                 const modalContent = `
-                    <div class="modal">
-                        <span class="close-btn">&times;</span>
-                        <img src="${movie.image_url}" alt="${movie.title}">
-                        <h3>${movie.title}</h3>
-                        <p>Genres: ${movie.genres.join(', ')}</p>
-                        <p>Date de sortie: ${movie.date_published}</p>
-                        <p>Classification: ${movie.rated}</p>
-                        <p>Score IMDB: ${movie.imdb_score}</p>
-                        <p>Réalisateur: ${movie.directors.join(', ')}</p>
-                        <p>Acteurs: ${movie.actors.join(', ')}</p>
-                        <p>Durée: ${movie.duration} minutes</p>
-                        <p>Pays: ${movie.countries.join(', ')}</p>
-                        <p>Recettes: ${movie.worldwide_gross_income}</p>
-                        <p>Résumé: ${movie.description}</p>
+                    <div class="modal-wrapper">
+                        <div class="modal">
+                            <span class="close-btn">&times;</span>
+                            <img src="${movie.image_url}" alt="${movie.title}">
+                            <h3>${movie.title}</h3>
+                            <p>Genres: ${movie.genres.join(', ')}</p>
+                            <p>Date de sortie: ${movie.date_published}</p>
+                            <p>Classification: ${movie.rated}</p>
+                            <p>Score IMDB: ${movie.imdb_score}</p>
+                            <p>Réalisateur: ${movie.directors.join(', ')}</p>
+                            <p>Acteurs: ${movie.actors.join(', ')}</p>
+                            <p>Durée: ${movie.duration} minutes</p>
+                            <p>Pays: ${movie.countries.join(', ')}</p>
+                            <p>Recettes: ${movie.worldwide_gross_income}</p>
+                            <p>Résumé: ${movie.description}</p>
+                        </div>
                     </div>
                 `;
-                const modalContainer = document.createElement('div');
-                modalContainer.classList.add('modal-container');
-                modalContainer.innerHTML = modalContent;
-                document.body.appendChild(modalContainer);
+                const modalWrapper = document.createElement('div');
+                modalWrapper.innerHTML = modalContent;
+
+                document.body.appendChild(modalWrapper); // Append the modal to the body
+                document.body.classList.add('modal-open'); // Prevent body scroll
 
                 // Close modal event
                 document.querySelector('.close-btn').addEventListener('click', () => {
-                    document.body.removeChild(modalContainer);
+                    modalWrapper.remove();
+                    document.body.classList.remove('modal-open'); // Allow body scroll
                 });
 
                 // Handle error for modal image
-                const modalImg = modalContainer.querySelector('img');
+                const modalImg = modalWrapper.querySelector('img');
                 modalImg.addEventListener('error', () => {
                     modalImg.style.display = 'none'; // Hide the image element if it fails to load
                 });
