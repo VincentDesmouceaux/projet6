@@ -169,21 +169,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Create and display the modal
                 const modalContent = `
-                    <div class="modal-wrapper">
-                        <div class="modal">
-                            <span class="close-btn">&times;</span>
-                            <img src="${movie.image_url}" alt="${movie.title}">
-                            <h3>${movie.title}</h3>
-                            <p>Genres: ${movie.genres.join(', ')}</p>
-                            <p>Date de sortie: ${movie.date_published}</p>
-                            <p>Classification: ${movie.rated}</p>
-                            <p>Score IMDB: ${movie.imdb_score}</p>
-                            <p>Réalisateur: ${movie.directors.join(', ')}</p>
-                            <p>Acteurs: ${movie.actors.join(', ')}</p>
-                            <p>Durée: ${movie.duration} minutes</p>
-                            <p>Pays: ${movie.countries.join(', ')}</p>
-                            <p>Recettes: ${movie.worldwide_gross_income}</p>
-                            <p>Résumé: ${movie.description}</p>
+                    <div class="modal-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: rgba(0, 0, 0, 0.5); z-index: 2000;">
+                        <div class="modal" style="background: #fff; border: 6px solid #333; padding: 20px; max-width: 90%; max-height: 90%; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); position: relative;">
+                            <div class="modal-content" style="display: flex; flex-direction: column; gap: 10px;">
+                                <div class="modal-header" style="display: flex; flex-direction: row; gap: 20px;">
+                                    <div class="modal-title-container" style="flex: 1;">
+                                        <h3 class="modal-title" style="font-family: Oswald, sans-serif; font-size: 48px; font-weight: 600; line-height: 71.14px; text-align: left; margin: 0;">${movie.title}</h3>
+                                        <div class="modal-info" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Date de sortie:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.date_published}</div>
+                                            </div>
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Genres:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.genres.join(', ')}</div>
+                                            </div>
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Durée:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.duration} minutes</div>
+                                            </div>
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Pays:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.countries.join(', ')}</div>
+                                            </div>
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Score IMDB:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.imdb_score}</div>
+                                            </div>
+                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
+                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Réalisé par:</div>
+                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.directors.join(', ')}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="flex-shrink: 0;">
+                                        <img class="modal-img" src="${movie.image_url}" alt="${movie.title}" style="width: 150px; height: auto; margin-left: 20px;">
+                                    </div>
+                                </div>
+                                <div class="modal-description" style="flex-grow: 1;">
+                                    <div style="margin: 10px 0; font-size: 16px;">${movie.description}</div>
+                                </div>
+                                <div class="modal-actors">
+                                    <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Avec:</div>
+                                    <div style="margin: 10px 0; font-size: 16px;">${movie.actors.join(', ')}</div>
+                                </div>
+                                <button class="close-btn" style="background-color: red; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 18px; align-self: center; margin-top: 20px;">Fermer</button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -194,13 +225,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.add('modal-open'); // Prevent body scroll
 
                 // Close modal event
-                document.querySelector('.close-btn').addEventListener('click', () => {
+                modalWrapper.querySelector('.close-btn').addEventListener('click', () => {
                     modalWrapper.remove();
                     document.body.classList.remove('modal-open'); // Allow body scroll
                 });
 
                 // Handle error for modal image
-                const modalImg = modalWrapper.querySelector('img');
+                const modalImg = modalWrapper.querySelector('.modal-img');
                 modalImg.addEventListener('error', () => {
                     modalImg.style.display = 'none'; // Hide the image element if it fails to load
                 });
