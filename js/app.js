@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isValid) {
                 document.getElementById('best-movie-img').src = movie.image_url;
                 document.getElementById('best-movie-title').textContent = movie.title;
-                document.getElementById('best-movie-summary').textContent = detailData.description;
+                document.getElementById('best-movie-summary').textContent = detailData.long_description;
                 document.getElementById('best-movie-details-btn').dataset.id = movie.id;
             }
         } catch (error) {
@@ -175,45 +175,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="modal-header" style="display: flex; flex-direction: row; gap: 20px;">
                                     <div class="modal-title-container" style="flex: 1;">
                                         <h3 class="modal-title" style="font-family: Oswald, sans-serif; font-size: 48px; font-weight: 600; line-height: 71.14px; text-align: left; margin: 0;">${movie.title}</h3>
-                                        <div class="modal-info" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Date de sortie:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.date_published}</div>
-                                            </div>
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Genres:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.genres.join(', ')}</div>
-                                            </div>
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Durée:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.duration} minutes</div>
-                                            </div>
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Pays:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.countries.join(', ')}</div>
-                                            </div>
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Score IMDB:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.imdb_score}</div>
-                                            </div>
-                                            <div class="modal-info-item" style="display: flex; gap: 5px;">
-                                                <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Réalisé par:</div>
-                                                <div class="modal-value" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">${movie.directors.join(', ')}</div>
-                                            </div>
-                                        </div>
+                                        <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${movie.date_published} - ${movie.genres.join(', ')}</h2>
+                                        <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${movie.duration} minutes (${movie.countries.join(', ')})</h2>
+                                        <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">IMDB score: ${movie.imdb_score}</h2>
+                                        <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin-top: 10px;">Réalisé par:</div>
+                                        <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 400; line-height: 35.57px; text-align: left; margin-top: 5px;">${movie.directors.join(', ')}</div>
                                     </div>
-                                    <div style="flex-shrink: 0;">
-                                        <img class="modal-img" src="${movie.image_url}" alt="${movie.title}" style="width: 150px; height: auto; margin-left: 20px;">
-                                    </div>
+                                    <img class="modal-img" src="${movie.image_url}" alt="${movie.title}" style="width: 227px; height: 334px; margin-left: 20px;">
                                 </div>
                                 <div class="modal-description" style="flex-grow: 1;">
-                                    <div style="margin: 10px 0; font-size: 16px;">${movie.description}</div>
+                                    <div style="font-family: Oswald, sans-serif; font-size: 28px; font-weight: 200; line-height: 41.5px; color: #000; margin: 10px 0;">${movie.long_description}</div>
                                 </div>
                                 <div class="modal-actors">
-                                    <div class="modal-label" style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left;">Avec:</div>
-                                    <div style="margin: 10px 0; font-size: 16px;">${movie.actors.join(', ')}</div>
+                                    <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">Avec:</div>
+                                    <div style="font-family: Oswald, sans-serif; font-size: 28px; font-weight: 200; line-height: 41.5px; color: #000; margin: 10px 0;">${movie.actors.join(', ')}</div>
                                 </div>
-                                <button class="close-btn" style="background-color: red; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 18px; align-self: center; margin-top: 20px;">Fermer</button>
+                                <button class="close-btn" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 18px; align-self: center; margin-top: 20px;">Fermer</button>
                             </div>
                         </div>
                     </div>
