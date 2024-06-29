@@ -153,6 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(movieElement);
     }
 
+    // Function to extract the year from a date string
+    function getYearFromDate(dateString) {
+        return new Date(dateString).getFullYear();
+    }
+
     // Event listener for "Détails" buttons to open modal with movie details
     document.addEventListener('click', async event => {
         if (event.target.classList.contains('details-btn')) {
@@ -170,12 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Create and display the modal
                 const modalContent = `
                     <div class="modal-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: rgba(0, 0, 0, 0.5); z-index: 2000;">
-                        <div class="modal" style="background: #fff; border: 6px solid #333; padding: 20px; max-width: 90%; max-height: 90%; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); position: relative;">
+                        <div class="modal" style="background: #fff; border: 6px solid #333; padding: 20px; width: 778px; height: 939px; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); position: relative; display: flex; flex-direction: column;">
                             <div class="modal-content" style="display: flex; flex-direction: column; gap: 10px;">
                                 <div class="modal-header" style="display: flex; flex-direction: row; gap: 20px;">
                                     <div class="modal-title-container" style="flex: 1;">
                                         <h3 class="modal-title" style="font-family: Oswald, sans-serif; font-size: 48px; font-weight: 600; line-height: 71.14px; text-align: left; margin: 0;">${movie.title}</h3>
-                                        <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${movie.date_published} - ${movie.genres.join(', ')}</h2>
+                                        <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${getYearFromDate(movie.date_published)} - ${movie.genres.join(', ')}</h2>
                                         <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${movie.duration} minutes (${movie.countries.join(', ')})</h2>
                                         <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">IMDB score: ${movie.imdb_score}</h2>
                                         <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin-top: 10px;">Réalisé par:</div>
@@ -183,14 +188,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                     <img class="modal-img" src="${movie.image_url}" alt="${movie.title}" style="width: 227px; height: 334px; margin-left: 20px;">
                                 </div>
-                                <div class="modal-description" style="flex-grow: 1;">
-                                    <div style="font-family: Oswald, sans-serif; font-size: 28px; font-weight: 200; line-height: 41.5px; color: #000; margin: 10px 0;">${movie.long_description}</div>
+                                <div class="modal-description">
+                                    <div style="font-family: Oswald, sans-serif; font-size: 19px; font-weight: 200; line-height: 28px; color: #000; margin: 10px 0;">${movie.long_description}</div>
                                 </div>
                                 <div class="modal-actors">
                                     <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">Avec:</div>
-                                    <div style="font-family: Oswald, sans-serif; font-size: 28px; font-weight: 200; line-height: 41.5px; color: #000; margin: 10px 0;">${movie.actors.join(', ')}</div>
+                                    <div style="font-family: Oswald, sans-serif; font-size: 19px; font-weight: 200; line-height: 28px; color: #000; margin: 10px 0;">${movie.actors.join(', ')}</div>
                                 </div>
-                                <button class="close-btn" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 18px; align-self: center; margin-top: 20px;">Fermer</button>
+                            </div>
+                            <div style="margin-top: auto; display: flex; justify-content: center;">
+                                <button class="close-btn" style="background-color: red; color: white; padding: 8px 60px; border: none; border-radius: 25px; cursor: pointer; font-size: 18px;">Fermer</button>
                             </div>
                         </div>
                     </div>
