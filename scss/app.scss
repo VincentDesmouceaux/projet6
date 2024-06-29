@@ -250,7 +250,7 @@ section {
 
 .movie-overlay {
   position: absolute;
-  bottom: 200px; /* Align to the bottom */
+  bottom: 100px; /* Adjust to position the overlay */
   left: 0;
   width: 100%;
   height: 40%; /* Cover 2/3 of the image */
@@ -335,15 +335,15 @@ section {
   }
 }
 
-
-
 body.modal-open {
   overflow: hidden;
 }
 
-
-
 @media (max-width: 768px) {
+  body {
+    margin: 20px; /* Increase global margin for smaller screens */
+  }
+
   .movie-item {
     flex: 0 0 calc(50% - 20px); /* 2 items per row on tablet */
   }
@@ -356,16 +356,61 @@ body.modal-open {
     display: block;
   }
 
+  #best-movie {
+    h2.section-title {
+      font-size: 36px !important;
+      line-height: 50px !important;
+    }
+  }
+
   #best-movie-details {
-    flex-direction: column;
+    flex-direction: row !important; /* Ensure image is on the right and info is on the left */
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    #best-movie-img {
+      width: 168px !important;
+      height: 246px !important;
+      margin-right: 30px !important; /* Move image to the right */
+    }
+
+    .movie-info {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      margin-right: 20px !important;
+
+      #best-movie-title {
+        font-size: 24px !important;
+        line-height: 30px !important;
+      }
+
+      #best-movie-summary {
+        font-size: 14px !important;
+        line-height: 20px !important;
+        margin: 10px 0 !important;
+      }
+
+      #best-movie-details-btn {
+        width: 100px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+      }
+    }
   }
 
-  #best-movie-img {
-    margin: 0 0 10px 0;
-  }
+  .movie-overlay {
+    bottom: 80px !important; /* Adjust the bottom position of the overlay */
 
-  #best-movie-title {
-    margin-bottom: 10px;
+    h3 {
+      font-size: 24px !important;
+    }
+
+    .details-btn {
+      font-size: 14px !important;
+      padding: 8px 12px !important; /* Adjust padding for smaller screens */
+    }
   }
 }
 
@@ -380,5 +425,55 @@ body.modal-open {
 
   .movie-list .movie-item:nth-child(-n+2) {
     display: block;
+  }
+
+  #best-movie {
+    h2.section-title {
+      font-size: 24px !important;
+      line-height: 34px !important;
+    }
+  }
+
+  #best-movie-details {
+    flex-direction: column !important; /* Stack image and info vertically */
+    align-items: center !important;
+
+    #best-movie-img {
+      width: 200px !important;
+      height: 200px !important;
+      margin-bottom: 20px !important;
+    }
+
+    .movie-info {
+      #best-movie-title {
+        font-size: 20px !important;
+        line-height: 28px !important;
+      }
+
+      #best-movie-summary {
+        font-size: 14px !important;
+        line-height: 20px !important;
+        margin: 10px 0 !important;
+      }
+
+      #best-movie-details-btn {
+        width: 100px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+      }
+    }
+  }
+
+  .movie-overlay {
+    bottom: 20px !important; /* Adjust the bottom position of the overlay for smaller screens */
+
+    h3 {
+      font-size: 20px !important;
+    }
+
+    .details-btn {
+      font-size: 12px !important;
+      padding: 6px 10px !important; /* Adjust padding for smaller screens */
+    }
   }
 }
