@@ -4,58 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JustStreamIt</title>
+    <!-- Lien vers le fichier CSS principal pour les styles -->
     <link rel="stylesheet" href="css/app.css">
+    <!-- Lien vers le fichier JavaScript principal pour les fonctionnalités -->
     <script defer src="js/app.js"></script>
 </head>
 <body>
+    <!-- Conteneur principal pour toute la page -->
     <div class="container">
+        <!-- En-tête de la page -->
         <header>
+            <!-- Logo du site -->
             <img src="img/juststreamiy.png" alt="JustStreamIt Logo" class="logo">
+            <!-- Texte d'en-tête -->
             <div class="header-text">
                 <h2>Vidéos à la demande</h2>
             </div>
         </header>
+        <!-- Section principale du contenu de la page -->
         <main>
+            <!-- Section pour le meilleur film -->
             <section id="best-movie">
                 <h2 class="section-title">Meilleur film</h2>
                 <div id="best-movie-details">
+                    <!-- Image du meilleur film -->
                     <img id="best-movie-img" src="" alt="Best Movie" class="best-movie-img-container">
+                    <!-- Informations sur le meilleur film -->
                     <div class="best-movie-info">
                         <h3 id="best-movie-title"></h3>
                         <p id="best-movie-summary"></p>
                         <div class="best-movie-details-btn-container">
+                            <!-- Bouton pour voir les détails du meilleur film -->
                             <button id="best-movie-details-btn" data-id="">Détails</button>
                         </div>
                     </div>
                 </div>
             </section>
+            <!-- Section pour les films les mieux notés -->
             <section id="top-rated-movies">
                 <h2 class="section-title">Films les mieux notés</h2>
+                <!-- Liste des films les mieux notés -->
                 <div id="top-rated-movies-list" class="movie-list"></div>
+                <!-- Bouton pour afficher plus de films les mieux notés -->
                 <button class="show-more" data-target="top-rated-movies-list">Voir plus</button>
             </section>
             
+            <!-- Section pour les films d'action -->
             <section id="category-1">
                 <h2 class="section-title">Action</h2>
+                <!-- Liste des films d'action -->
                 <div id="category-1-list" class="movie-list"></div>
+                <!-- Bouton pour afficher plus de films d'action -->
                 <button class="show-more" data-target="category-1-list">Voir plus</button>
             </section>
             
+            <!-- Section pour les comédies -->
             <section id="category-2">
                 <h2 class="section-title">Comédies</h2>
+                <!-- Liste des comédies -->
                 <div id="category-2-list" class="movie-list"></div>
+                <!-- Bouton pour afficher plus de comédies -->
                 <button class="show-more" data-target="category-2-list">Voir plus</button>
             </section>
             
+            <!-- Section pour les films d'autres catégories -->
             <section id="custom-category">
+                <!-- Conteneur pour le titre de la catégorie et le menu déroulant -->
                 <div class="category-title-container">
                     <h2 class="section-title">Autres:</h2>
+                    <!-- Menu déroulant pour sélectionner une catégorie -->
                     <select id="category-select"></select>
                 </div>
+                <!-- Liste des films de la catégorie sélectionnée -->
                 <div id="custom-category-list" class="movie-list"></div>
+                <!-- Bouton pour afficher plus de films de la catégorie sélectionnée -->
                 <button id="show-custom-button" class="show-more" data-target="custom-category-list" style="display: none;">Voir plus</button>
             </section>
         </main>
+        <!-- Pied de page -->
         <footer>
             <p>JustStreamIt &copy; 2024</p>
         </footer>
