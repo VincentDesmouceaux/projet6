@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedGenre = event.target.value;
         state['custom-category-list'] = { page1: 1, page2: 2 };  // Reset page state for custom category
         await initMoviesWithPagination(`${apiBaseURL}?genre=${selectedGenre}&sort_by=-imdb_score&limit=5`, 'custom-category-list', 6);
+        updateShowCustomButtonVisibility('custom-category-list');
     });
 
     async function fetchAndDisplayBestMovie(url) {
@@ -174,6 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
             showMoreBtn.style.display = 'block';
         } else {
             showMoreBtn.style.display = 'none';
+        }
+    }
+
+    async function updateShowCustomButtonVisibility(elementId) {
+        const container = document.getElementById(elementId);
+        const movieItems = container.querySelectorAll('.movie-item');
+        const showCustomButton = document.getElementById('show-custom-button');
+        if (movieItems.length > 0) {
+            showCustomButton.style.display = 'block';
+        } else {
+            showCustomButton.style.display = 'none';
         }
     }
 
