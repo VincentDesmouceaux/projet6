@@ -1,3 +1,6 @@
+/**
+ * Main script for JustStreamIt application.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const apiBaseURL = 'http://127.0.0.1:8000/api/v1/titles/';
     const genresURL = 'http://127.0.0.1:8000/api/v1/genres/';
@@ -37,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateShowCustomButtonVisibility('custom-category-list');
     });
 
+    /**
+     * Fetch and display the best movie.
+     * @param {string} url - The URL to fetch the best movie.
+     */
     async function fetchAndDisplayBestMovie(url) {
         try {
             const response = await fetch(url);
@@ -55,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /**
+     * Initialize movies with pagination.
+     * @param {string} url - The URL to fetch movies.
+     * @param {string} elementId - The ID of the element to display the movies.
+     * @param {number} limit - The number of movies to display.
+     */
     async function initMoviesWithPagination(url, elementId, limit) {
         const container = document.getElementById(elementId);
         const showMoreBtn = document.querySelector(`.show-more[data-target="${elementId}"]`);
@@ -113,6 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Fetch genres and populate the select dropdown.
+     * @param {string} url - The URL to fetch genres.
+     */
     async function fetchGenres(url) {
         const categorySelect = document.getElementById('category-select');
         categorySelect.innerHTML = '';  // Clear existing options
@@ -139,6 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchAllGenres();
     }
 
+    /**
+     * Validate and return a valid image URL.
+     * @param {string} url - The URL of the image.
+     * @param {string} defaultImageUrl - The default image URL to use if the original URL is invalid.
+     * @returns {Promise<string>} - A promise that resolves to a valid image URL.
+     */
     async function getValidImageUrl(url, defaultImageUrl) {
         return new Promise((resolve) => {
             const img = new Image();
@@ -148,6 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Display a movie in the specified element.
+     * @param {Object} movie - The movie object to display.
+     * @param {string} elementId - The ID of the element to display the movie in.
+     */
     function displayMovie(movie, elementId) {
         const container = document.getElementById(elementId);
         const movieElement = document.createElement('div');
@@ -168,6 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(movieElement);
     }
 
+    /**
+     * Update the visibility of the "Voir plus" button based on the number of displayed movies.
+     * @param {string} elementId - The ID of the element containing the movies.
+     * @param {HTMLElement} showMoreBtn - The "Voir plus" button element.
+     */
     async function updateShowMoreButtonVisibility(elementId, showMoreBtn) {
         const container = document.getElementById(elementId);
         const movieItems = container.querySelectorAll('.movie-item');
@@ -178,6 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /**
+     * Update the visibility of the "Show Custom" button based on the number of displayed custom category movies.
+     * @param {string} elementId - The ID of the element containing the custom category movies.
+     */
     async function updateShowCustomButtonVisibility(elementId) {
         const container = document.getElementById(elementId);
         const movieItems = container.querySelectorAll('.movie-item');
@@ -189,7 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to extract the year from a date string
+    /**
+     * Extract the year from a date string.
+     * @param {string} dateString - The date string to extract the year from.
+     * @returns {number} - The extracted year.
+     */
     function getYearFromDate(dateString) {
         return new Date(dateString).getFullYear();
     }
@@ -197,6 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for "Détails" buttons to open modal with movie details
     document.addEventListener('click', async event => {
         if (event.target.classList.contains('details-btn') || event.target.id === 'best-movie-details-btn') {
+            // Prevent opening the modal on mobile devices (max-width: 480px)
+            if (window.innerWidth <= 480) return;
+
             const movieId = event.target.dataset.id;
             try {
                 const response = await fetch(`${apiBaseURL}${movieId}`);
