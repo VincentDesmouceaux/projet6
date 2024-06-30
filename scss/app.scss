@@ -1,37 +1,40 @@
-$primary-color: #333;
-$secondary-color: #f0f0f0;
-$header-bg-color: #61787F;
-$header-height: 150px;
-$logo-height: 120px;
-$button-height: 68px;
-$button-width: 166px;
-$button-radius: 25px;
-$font-family: Arial, sans-serif;
-$header-font-family: 'Oswald', sans-serif;
-$header-font-size: 48px;
-$header-font-weight: 300;
-$hover-color: #555;
-$background-color: #FFFFFF;
-$text-color-white: #FFFFFF;
-$text-color-black: #000000;
-$best-movie-font-size: 48px;
-$best-movie-font-weight: 600;
-$best-movie-line-height: 71.14px;
-$details-button-bg: #4f4f4f;
-$overlay-bg: rgba(0, 0, 0, 0.7);
-$content-padding: 0 20px;
-$section-margin: 40px auto;
-$max-content-width: 1200px;
-$more-button-bg: red;
-$more-button-hover-bg: darkred;
-$more-button-text-color: #FFFFFF;
+// Variables de couleur
+$primary-color: #333; // Couleur primaire
+$secondary-color: #f0f0f0; // Couleur secondaire
+$header-bg-color: #61787F; // Couleur de fond de l'en-tête
+$header-height: 150px; // Hauteur de l'en-tête
+$logo-height: 120px; // Hauteur du logo
+$button-height: 68px; // Hauteur des boutons
+$button-width: 166px; // Largeur des boutons
+$button-radius: 25px; // Rayon de bordure des boutons
+$font-family: Arial, sans-serif; // Police par défaut
+$header-font-family: 'Oswald', sans-serif; // Police de l'en-tête
+$header-font-size: 48px; // Taille de police de l'en-tête
+$header-font-weight: 300; // Poids de la police de l'en-tête
+$hover-color: #555; // Couleur au survol
+$background-color: #FFFFFF; // Couleur de fond
+$text-color-white: #FFFFFF; // Couleur de texte blanc
+$text-color-black: #000000; // Couleur de texte noir
+$best-movie-font-size: 48px; // Taille de police du meilleur film
+$best-movie-font-weight: 600; // Poids de police du meilleur film
+$best-movie-line-height: 71.14px; // Hauteur de ligne du meilleur film
+$details-button-bg: #4f4f4f; // Couleur de fond du bouton de détails
+$overlay-bg: rgba(0, 0, 0, 0.7); // Couleur de l'overlay
+$content-padding: 0 20px; // Padding du contenu
+$section-margin: 40px auto; // Marge des sections
+$max-content-width: 1200px; // Largeur maximale du contenu
+$more-button-bg: red; // Couleur de fond du bouton "Voir plus"
+$more-button-hover-bg: darkred; // Couleur de fond au survol du bouton "Voir plus"
+$more-button-text-color: #FFFFFF; // Couleur de texte du bouton "Voir plus"
 
+// Mixin pour centrer en flexbox
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+// Mixin pour la réactivité
 @mixin responsive($property, $desktop, $tablet, $mobile) {
   #{$property}: $desktop;
 
@@ -44,6 +47,7 @@ $more-button-text-color: #FFFFFF;
   }
 }
 
+// Styles globaux du corps de la page
 body {
   font-family: $font-family;
   margin: 0;
@@ -56,6 +60,7 @@ body {
   background: var(--layout-surface-background, $background-color);
 }
 
+// Styles du conteneur principal
 .container {
   width: 100%;
   max-width: $max-content-width;
@@ -65,6 +70,7 @@ body {
   overflow: hidden;
 }
 
+// Styles de l'en-tête
 header {
   background-color: $header-bg-color;
   height: $header-height;
@@ -77,11 +83,13 @@ header {
   box-sizing: border-box;
   margin-top: 100px;
 
+  // Styles du logo
   .logo {
     width: auto;
     height: $logo-height;
   }
 
+  // Styles du texte de l'en-tête
   .header-text {
     flex-grow: 1;
     color: $text-color-white;
@@ -105,6 +113,7 @@ header {
   }
 }
 
+// Styles du contenu principal
 main {
   width: 100%;
   max-width: $max-content-width;
@@ -116,10 +125,12 @@ main {
   }
 }
 
+// Styles des sections
 section {
   margin: 60px auto;
 }
 
+// Styles des titres de section
 .section-title {
   font-family: $header-font-family;
   font-size: $best-movie-font-size;
@@ -139,16 +150,19 @@ section {
   }
 }
 
+// Styles du conteneur du titre de catégorie
 .category-title-container {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
+// Styles pour les titres de section dans le conteneur de titre de catégorie
 .category-title-container .section-title {
   margin-right: 10px;
 }
 
+// Styles de la section du meilleur film
 #best-movie {
   width: 100%;
   margin: 0 auto;
@@ -160,6 +174,7 @@ section {
     @extend .section-title;
   }
 
+  // Styles des détails du meilleur film
   #best-movie-details {
     display: flex;
     width: 100%;
@@ -172,23 +187,25 @@ section {
     @include responsive(flex-direction, row, column, column);
   }
 
+  // Styles de l'image du meilleur film
   img#best-movie-img {
     width: 227px;
     height: 334px;
     margin-right: 20px;
 
-    @include responsive(width, 227px, 168px, 298px); // Adjusted width for 480px
-    @include responsive(height, 334px, 246px, 241px); // Adjusted height for 480px
-    @include responsive(margin-right, 20px, 0, 0); // Adjusted margin-right for different breakpoints
+    @include responsive(width, 227px, 168px, 298px); // Largeur ajustée pour 480px
+    @include responsive(height, 334px, 246px, 241px); // Hauteur ajustée pour 480px
+    @include responsive(margin-right, 20px, 0, 0); // Marge ajustée pour différents points d'arrêt
   }
 
+  // Styles des informations du meilleur film
   .best-movie-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
     box-sizing: border-box;
-    width: 100%; // Add this line to ensure it takes full width
+    width: 100%; // S'assurer qu'il prend toute la largeur
 
     h3 {
       font-family: $header-font-family;
@@ -247,6 +264,7 @@ section {
   }
 }
 
+// Styles des boutons de détails
 .details-btn {
   background-color: $details-button-bg;
   color: white;
@@ -261,6 +279,7 @@ section {
   }
 }
 
+// Styles des éléments de film
 .movie-item {
   position: relative;
   margin: 10px;
@@ -270,9 +289,10 @@ section {
   height: 0;
   padding-bottom: 33.333%;
 
-  @include responsive(padding-bottom, 33.333%, 50%, 50%); // Adjusted for square images on tablet
+  @include responsive(padding-bottom, 33.333%, 50%, 50%); // Ajusté pour les images carrées sur tablette
 }
 
+// Styles des images des films
 .movie-item img {
   width: 100%;
   height: 100%;
@@ -282,6 +302,7 @@ section {
   left: 0;
 }
 
+// Styles des overlays des films
 .movie-overlay {
   position: absolute;
   bottom: 100px;
@@ -305,6 +326,7 @@ section {
   font-weight: normal;
 }
 
+// Styles des boutons de détails dans les overlays
 .movie-overlay .details-btn {
   background-color: $details-button-bg;
   color: white;
@@ -322,6 +344,7 @@ section {
   }
 }
 
+// Styles du sélecteur de catégorie
 #category-select {
   width: 404px;
   height: 58.43px;
@@ -335,6 +358,7 @@ section {
   line-height: 1.5;
 }
 
+// Styles des options du sélecteur de catégorie
 #category-select option {
   padding: 10px;
   font-family: "Oswald", sans-serif;
@@ -343,6 +367,7 @@ section {
   height: 40px;
 }
 
+// Styles de la liste des films
 .movie-list {
   display: flex;
   flex-direction: row;
@@ -350,6 +375,7 @@ section {
   margin-top: 40px;
 }
 
+// Styles des boutons "Voir plus"
 .show-more {
   display: block;
   background-color: red;
@@ -369,15 +395,17 @@ section {
   }
 }
 
+// Styles pour le corps de la page lorsque la modal est ouverte
 body.modal-open {
   overflow: hidden;
 }
 
+// Affichage des films lorsque la classe "show-all" est ajoutée
 .show-all .movie-item {
   display: block !important; // Afficher tous les films lorsque show-all est ajouté
 }
 
-// Masquer les boutons "Voir plus" sur les grands écrans
+// Styles pour masquer les boutons "Voir plus" sur les grands écrans
 @media (min-width: 769px) {
   .show-more {
     display: none !important; // Utilisation de !important pour forcer le masquage
@@ -387,7 +415,7 @@ body.modal-open {
   }
 }
 
-// Masquer les films au-delà des 4 premiers sur les tablettes
+// Styles pour masquer les films au-delà des 4 premiers sur les tablettes
 @media (max-width: 768px) {
   body {
     margin: 20px;
@@ -472,7 +500,7 @@ body.modal-open {
   }
 }
 
-// Masquer les films au-delà des 2 premiers sur les mobiles
+// Styles pour masquer les films au-delà des 2 premiers sur les mobiles
 @media (max-width: 480px) {
   header {
     justify-content: center;
@@ -517,8 +545,8 @@ body.modal-open {
     }
 
     img#best-movie-img {
-      width: 365px !important; // Ensure the image width
-      height: 241px !important; // Ensure the image height
+      width: 365px !important; // Largeur ajustée
+      height: 241px !important; // Hauteur ajustée
       margin-left: 0 auto !important;
       margin-bottom: 10px !important;
       object-fit: cover;
@@ -530,7 +558,7 @@ body.modal-open {
       flex-direction: column !important;
       align-items: center !important;
       text-align: center !important;
-      width: 100% !important; // Ensure it takes full width
+      width: 100% !important; // S'assurer qu'il prend toute la largeur
 
       h3 {
         font-family: Oswald, sans-serif !important;
@@ -551,7 +579,7 @@ body.modal-open {
       .best-movie-details-btn-container {
         display: flex !important;
         justify-content: center !important;
-        width: 100%; // Add this line to ensure it takes full width
+        width: 100%; // S'assurer qu'il prend toute la largeur
 
         button {
           background-color: red !important;
@@ -632,6 +660,7 @@ body.modal-open {
   }
 }
 
+// Masquer le bouton "Voir plus" lorsque tous les films sont affichés
 .movie-list.show-all .show-more {
-  display: none; // Masquer le bouton "Voir plus" lorsque tous les films sont affichés
+  display: none; 
 }
