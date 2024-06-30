@@ -110,6 +110,10 @@ main {
   max-width: $max-content-width;
   box-sizing: border-box;
   margin-top: 40px;
+
+  @media (max-width: 768px) {
+    margin: 0 auto; // Ajouter de la marge pour éviter l'étirement du contenu sur tablette
+  }
 }
 
 section {
@@ -271,6 +275,8 @@ section {
   box-sizing: border-box;
   height: 0;
   padding-bottom: 33.333%;
+
+  @include responsive(padding-bottom, 33.333%, 50%, 50%); // Adjusted for square images on tablet
 }
 
 .movie-item img {
@@ -641,4 +647,8 @@ body.modal-open {
   .category-title-container h2 {
     display: none;
   }
+}
+
+.movie-list.show-all .show-more {
+  display: none; // Masquer le bouton "Voir plus" lorsque tous les films sont affichés
 }

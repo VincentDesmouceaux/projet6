@@ -63,6 +63,11 @@ main {
   box-sizing: border-box;
   margin-top: 40px;
 }
+@media (max-width: 768px) {
+  main {
+    margin: 0 auto;
+  }
+}
 
 section {
   margin: 60px auto;
@@ -314,6 +319,17 @@ section {
   box-sizing: border-box;
   height: 0;
   padding-bottom: 33.333%;
+  padding-bottom: 33.333%;
+}
+@media (max-width: 768px) {
+  .movie-item {
+    padding-bottom: 50%;
+  }
+}
+@media (max-width: 480px) {
+  .movie-item {
+    padding-bottom: 50%;
+  }
 }
 
 .movie-item img {
@@ -637,6 +653,9 @@ body.modal-open {
   .category-title-container h2 {
     display: none;
   }
+}
+.movie-list.show-all .show-more {
+  display: none;
 }
 
 /*# sourceMappingURL=app.css.map */
