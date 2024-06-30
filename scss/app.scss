@@ -172,20 +172,14 @@ section {
     @include responsive(flex-direction, row, column, column);
   }
 
-  .best-movie-img-container {
-    width: auto;
-    display: block;
+  img#best-movie-img {
+    width: 227px;
+    height: 334px;
     margin-right: 20px;
 
-    @include responsive(margin-right, 20px, 0, 0);
-
-    img {
-      width: 227px;
-      height: 334px;
-
-      @include responsive(width, 227px, 168px, 298px); // Adjusted width for 480px
-      @include responsive(height, 334px, 246px, 241px); // Adjusted height for 480px
-    }
+    @include responsive(width, 227px, 168px, 298px); // Adjusted width for 480px
+    @include responsive(height, 334px, 246px, 241px); // Adjusted height for 480px
+    @include responsive(margin-right, 20px, 0, 0); // Adjusted margin-right for different breakpoints
   }
 
   .best-movie-info {
@@ -430,16 +424,10 @@ body.modal-open {
     align-items: center !important;
     justify-content: space-between !important;
 
-    .best-movie-img-container {
-      width: auto;
-      display: block;
-      margin-bottom: 0;
-
-      img {
-        width: 168px !important;
-        height: 246px !important;
-        margin-right: 30px !important;
-      }
+    img#best-movie-img {
+      width: 168px !important;
+      height: 246px !important;
+      margin-right: 30px !important;
     }
 
     .best-movie-info {
@@ -528,18 +516,13 @@ body.modal-open {
       box-sizing: border-box !important;
     }
 
-    .best-movie-img-container {
-      width: 100% !important;
-      display: flex !important;
-      justify-content: center !important;
+    img#best-movie-img {
+      width: 365px !important; // Ensure the image width
+      height: 241px !important; // Ensure the image height
+      margin-left: 0 auto !important;
       margin-bottom: 10px !important;
-
-      img {
-        width: 298px !important; // Ensure the image width
-        height: 241px !important; // Ensure the image height
-        margin-left: auto !important;
-        object-fit: cover;
-      }
+      object-fit: cover;
+      display: block !important;
     }
 
     .best-movie-info {

@@ -130,46 +130,42 @@ section {
     flex-direction: column;
   }
 }
-#best-movie .best-movie-img-container {
-  width: auto;
-  display: block;
+#best-movie img#best-movie-img {
+  width: 227px;
+  height: 334px;
   margin-right: 20px;
+  width: 227px;
+  height: 334px;
   margin-right: 20px;
 }
 @media (max-width: 768px) {
-  #best-movie .best-movie-img-container {
-    margin-right: 0;
-  }
-}
-@media (max-width: 480px) {
-  #best-movie .best-movie-img-container {
-    margin-right: 0;
-  }
-}
-#best-movie .best-movie-img-container img {
-  width: 227px;
-  height: 334px;
-  width: 227px;
-  height: 334px;
-}
-@media (max-width: 768px) {
-  #best-movie .best-movie-img-container img {
+  #best-movie img#best-movie-img {
     width: 168px;
   }
 }
 @media (max-width: 480px) {
-  #best-movie .best-movie-img-container img {
+  #best-movie img#best-movie-img {
     width: 298px;
   }
 }
 @media (max-width: 768px) {
-  #best-movie .best-movie-img-container img {
+  #best-movie img#best-movie-img {
     height: 246px;
   }
 }
 @media (max-width: 480px) {
-  #best-movie .best-movie-img-container img {
+  #best-movie img#best-movie-img {
     height: 241px;
+  }
+}
+@media (max-width: 768px) {
+  #best-movie img#best-movie-img {
+    margin-right: 0;
+  }
+}
+@media (max-width: 480px) {
+  #best-movie img#best-movie-img {
+    margin-right: 0;
   }
 }
 #best-movie .best-movie-info {
@@ -472,12 +468,7 @@ body.modal-open {
     align-items: center !important;
     justify-content: space-between !important;
   }
-  #best-movie-details .best-movie-img-container {
-    width: auto;
-    display: block;
-    margin-bottom: 0;
-  }
-  #best-movie-details .best-movie-img-container img {
+  #best-movie-details img#best-movie-img {
     width: 168px !important;
     height: 246px !important;
     margin-right: 30px !important;
@@ -550,17 +541,13 @@ body.modal-open {
     margin: 0 auto !important;
     box-sizing: border-box !important;
   }
-  #best-movie .best-movie-img-container {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin-bottom: 10px !important;
-  }
-  #best-movie .best-movie-img-container img {
-    width: 298px !important;
+  #best-movie img#best-movie-img {
+    width: 365px !important;
     height: 241px !important;
-    margin-left: auto !important;
+    margin-left: 0 auto !important;
+    margin-bottom: 10px !important;
     object-fit: cover;
+    display: block !important;
   }
   #best-movie .best-movie-info {
     display: flex !important;
