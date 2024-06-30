@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for "Détails" buttons to open modal with movie details
     document.addEventListener('click', async event => {
-        if (event.target.classList.contains('details-btn')) {
+        if (event.target.classList.contains('details-btn') || event.target.id === 'best-movie-details-btn') {
             const movieId = event.target.dataset.id;
             try {
                 const response = await fetch(`${apiBaseURL}${movieId}`);

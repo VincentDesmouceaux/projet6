@@ -1,14 +1,14 @@
 $primary-color: #333;
 $secondary-color: #f0f0f0;
 $header-bg-color: #61787F;
-$header-height: 150px; /* Increased height */
-$logo-height: 120px; /* Adjusted logo height */
+$header-height: 150px;
+$logo-height: 120px;
 $button-height: 68px;
 $button-width: 166px;
 $button-radius: 25px;
 $font-family: Arial, sans-serif;
 $header-font-family: 'Oswald', sans-serif;
-$header-font-size: 48px; /* Adjusted font size */
+$header-font-size: 48px;
 $header-font-weight: 300;
 $hover-color: #555;
 $background-color: #FFFFFF;
@@ -17,16 +17,15 @@ $text-color-black: #000000;
 $best-movie-font-size: 48px;
 $best-movie-font-weight: 600;
 $best-movie-line-height: 71.14px;
-$details-button-bg: #4f4f4f; /* Gris foncé */
+$details-button-bg: #4f4f4f;
 $overlay-bg: rgba(0, 0, 0, 0.7);
 $content-padding: 0 20px;
 $section-margin: 40px auto;
 $max-content-width: 1200px;
-$more-button-bg: red; /* Changement de couleur du bouton "Voir plus" */
-$more-button-hover-bg: darkred; /* Changement de couleur au survol */
+$more-button-bg: red;
+$more-button-hover-bg: darkred;
 $more-button-text-color: #FFFFFF;
 
-/* Mixins */
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -45,7 +44,6 @@ $more-button-text-color: #FFFFFF;
   }
 }
 
-/* Global styles */
 body {
   font-family: $font-family;
   margin: 0;
@@ -64,12 +62,12 @@ body {
   padding: $content-padding;
   margin: 0 auto;
   box-sizing: border-box;
-  overflow: hidden; /* Ensures that child elements do not overflow the container */
+  overflow: hidden;
 }
 
 header {
   background-color: $header-bg-color;
-  height: $header-height; /* Updated height */
+  height: $header-height;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -77,11 +75,11 @@ header {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: 100px; /* Added margin-top */
+  margin-top: 100px;
 
   .logo {
     width: auto;
-    height: $logo-height; /* Updated logo height */
+    height: $logo-height;
   }
 
   .header-text {
@@ -90,7 +88,7 @@ header {
 
     h2 {
       font-family: $header-font-family;
-      font-size: $header-font-size; /* Updated font size */
+      font-size: $header-font-size;
       font-weight: $header-font-weight;
       line-height: 59.28px;
       margin: 0;
@@ -111,11 +109,11 @@ main {
   width: 100%;
   max-width: $max-content-width;
   box-sizing: border-box;
-  margin-top: 40px; /* Added margin-top */
+  margin-top: 40px;
 }
 
 section {
-  margin: 60px auto; /* Increased section margin */
+  margin: 60px auto;
 }
 
 .section-title {
@@ -167,47 +165,68 @@ section {
     margin-top: 20px;
     box-sizing: border-box;
 
-    #best-movie-img {
-      width: 227px;
-      height: 334px; /* Set height to make the image taller */
-      margin-right: 20px;
+    @include responsive(flex-direction, row, column, column);
+  }
 
-      @include responsive(margin-right, 20px, 0, 0);
+  .best-movie-img-container {
+    width: auto;
+    display: block;
+    margin-right: 20px;
+
+    @include responsive(margin-right, 20px, 0, 0);
+
+    img {
+      width: 227px;
+      height: 334px;
+
+      @include responsive(width, 227px, 168px, 100%);
+      @include responsive(height, 334px, 246px, auto);
+    }
+  }
+
+  .best-movie-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    box-sizing: border-box;
+
+    h3 {
+      font-family: $header-font-family;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 71.14px;
+      color: $text-color-black;
+      margin: 0;
+      width: 100%;
+      height: 44px;
+      text-align: left;
+
+      @include responsive(font-size, 48px, 40px, 32px);
+      @include responsive(line-height, 71.14px, 60px, 47.42px);
     }
 
-    .movie-info {
+    p {
+      font-family: $header-font-family;
+      font-size: 28px;
+      font-weight: 200;
+      line-height: 41.5px;
+      color: $text-color-black;
+      margin: 10px 0;
+      width: 100%;
+      height: auto;
+      text-align: left;
+
+      @include responsive(font-size, 28px, 24px, 16px);
+      @include responsive(line-height, 41.5px, 36px, 23.71px);
+    }
+
+    .best-movie-details-btn-container {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
-      box-sizing: border-box;
+      justify-content: flex-end;
 
-      #best-movie-title {
-        font-family: $header-font-family;
-        font-size: 48px;
-        font-weight: 600;
-        line-height: 71.14px;
-        color: $text-color-black;
-        margin: 0;
-        width: 100%;
-        height: 44px;
-        text-align: left;
-      }
-
-      #best-movie-summary {
-        font-family: $header-font-family;
-        font-size: 28px;
-        font-weight: 200;
-        line-height: 41.5px;
-        color: $text-color-black;
-        margin: 10px 0;
-        width: 100%;
-        height: auto;
-        text-align: left;
-      }
-
-      #best-movie-details-btn {
-        background-color: red; /* Red color for the best movie details button */
+      button {
+        background-color: red;
         color: white;
         padding: 2px 4px;
         border: none;
@@ -215,27 +234,28 @@ section {
         width: $button-width;
         height: $button-height;
         border-radius: $button-radius;
-        align-self: flex-end;
-        font-size: 20px; /* Increased font size */
+        font-size: 20px;
+
+        @include responsive(width, $button-width, 123px, 100%);
+        @include responsive(height, $button-height, 49px, auto);
+        @include responsive(font-size, 20px, 20px, 16px);
 
         &:hover {
           background-color: darkred;
         }
       }
     }
-
-    @include responsive(flex-direction, row, column, column);
   }
 }
 
 .details-btn {
-  background-color: $details-button-bg; /* Default color for other details buttons */
+  background-color: $details-button-bg;
   color: white;
-  padding: 10px 15px; /* Increased padding for better ergonomics */
+  padding: 10px 15px;
   border: none;
   cursor: pointer;
   border-radius: $button-radius;
-  font-size: 18px; /* Increased font size */
+  font-size: 18px;
 
   &:hover {
     background-color: $hover-color;
@@ -246,10 +266,10 @@ section {
   position: relative;
   margin: 10px;
   text-align: center;
-  flex: 0 0 calc(33.333% - 20px); /* 3 items per row */
+  flex: 0 0 calc(33.333% - 20px);
   box-sizing: border-box;
   height: 0;
-  padding-bottom: 33.333%; /* Maintain square aspect ratio */
+  padding-bottom: 33.333%;
 }
 
 .movie-item img {
@@ -263,11 +283,11 @@ section {
 
 .movie-overlay {
   position: absolute;
-  bottom: 100px; /* Adjust to position the overlay */
+  bottom: 100px;
   left: 0;
   width: 100%;
-  height: 40%; /* Cover 2/3 of the image */
-  background-color: rgba(0, 0, 0, 0.5); /* Black opaque background */
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 15px;
   box-sizing: border-box;
@@ -280,21 +300,21 @@ section {
 .movie-overlay h3 {
   margin: 0 0 10px 0;
   font-family: $header-font-family;
-  font-size: 24px; /* Increased font size */
-  font-weight: normal; /* Non-bold text */
+  font-size: 24px;
+  font-weight: normal;
 }
 
 .movie-overlay .details-btn {
   background-color: $details-button-bg;
   color: white;
-  padding: 10px 15px; /* Increased padding */
+  padding: 10px 15px;
   border: none;
   cursor: pointer;
   border-radius: $button-radius;
-  font-size: 18px; /* Increased font size */
+  font-size: 18px;
   align-self: flex-end;
-  position: relative; /* Align relative to the overlay */
-  margin-top: auto; /* Push the button to the bottom */
+  position: relative;
+  margin-top: auto;
 
   &:hover {
     background-color: $hover-color;
@@ -311,7 +331,7 @@ section {
   font-family: "Oswald", sans-serif;
   font-size: 24px;
   font-weight: normal;
-  line-height: 1.5; /* Ensures better spacing within the select */
+  line-height: 1.5;
 }
 
 #category-select option {
@@ -326,12 +346,12 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 40px; /* Added margin-top for extra spacing */
+  margin-top: 40px;
 }
 
 .show-more {
   display: block;
-  background-color: red; /* Mettre la couleur de fond en rouge */
+  background-color: red;
   color: $more-button-text-color;
   padding: 10px 80px;
   border: none;
@@ -340,11 +360,11 @@ section {
   font-family: $header-font-family;
   font-size: 18px;
   font-weight: 600;
-  margin: 20px auto; /* Centered the button */
+  margin: 20px auto;
   text-align: center;
 
   &:hover {
-    background-color: darkred; /* Changer la couleur au survol */
+    background-color: darkred;
   }
 }
 
@@ -354,11 +374,11 @@ body.modal-open {
 
 @media (max-width: 768px) {
   body {
-    margin: 20px; /* Increase global margin for smaller screens */
+    margin: 20px;
   }
 
   .movie-item {
-    flex: 0 0 calc(50% - 20px); /* 2 items per row on tablet */
+    flex: 0 0 calc(50% - 20px);
   }
 
   .movie-list .movie-item {
@@ -384,44 +404,52 @@ body.modal-open {
   }
 
   #best-movie-details {
-    flex-direction: row !important; /* Ensure image is on the right and info is on the left */
+    flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
 
-    #best-movie-img {
-      width: 168px !important;
-      height: 246px !important;
-      margin-right: 30px !important; /* Move image to the right */
+    .best-movie-img-container {
+      width: auto;
+      display: block;
+      margin-bottom: 0;
+
+      img {
+        width: 168px !important;
+        height: 246px !important;
+        margin-right: 30px !important;
+      }
     }
 
-    .movie-info {
+    .best-movie-info {
       flex: 1 !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
       margin-right: 20px !important;
 
-      #best-movie-title {
+      h3 {
         font-size: 40px !important;
         line-height: 60px !important;
       }
 
-      #best-movie-summary {
+      p {
         font-size: 24px !important;
         line-height: 36px !important;
         margin: 10px 0 !important;
       }
 
-      #best-movie-details-btn {
-        width: 123px !important;
-        height: 49px !important;
-        font-size: 20px !important;
+      .best-movie-details-btn-container {
+        button {
+          width: 123px !important;
+          height: 49px !important;
+          font-size: 20px !important;
+        }
       }
     }
   }
 
   .movie-overlay {
-    bottom: 80px !important; /* Adjust the bottom position of the overlay */
+    bottom: 80px !important;
 
     h3 {
       font-size: 24px !important;
@@ -429,71 +457,156 @@ body.modal-open {
 
     .details-btn {
       font-size: 14px !important;
-      padding: 8px 12px !important; /* Adjust padding for smaller screens */
+      padding: 8px 12px !important;
     }
   }
 }
 
 @media (max-width: 480px) {
-  .movie-item {
-    flex: 0 0 calc(100% - 20px); /* 1 item per row on mobile */
+  header {
+    justify-content: center;
   }
 
-  .movie-list .movie-item {
+  .header-text {
     display: none;
   }
 
-  .movie-list .movie-item:nth-child(-n+2) {
-    display: block;
+  .logo {
+    width: 182px;
+    height: 130px;
+  }
+
+  .section-title {
+    font-family: Oswald, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 47.42px;
+    text-align: center;
   }
 
   #best-movie {
     h2.section-title {
-      font-size: 24px !important;
-      line-height: 34px !important;
+      text-align: center;
+      font-family: Oswald, sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 47.42px;
+    }
+
+    #best-movie-details {
+      width: 100% !important;
+      height: auto !important;
+      border: 6px solid #000000 !important;
+      display: block !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 20px !important;
+      margin: 0 auto !important;
+      box-sizing: border-box !important;
+    }
+
+    .best-movie-img-container {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      margin-bottom: 10px !important;
+
+      img {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+    .best-movie-info {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+
+      h3 {
+        font-family: Oswald, sans-serif !important;
+        font-size: 32px !important;
+        font-weight: 600 !important;
+        line-height: 47.42px !important;
+        margin-bottom: 10px !important;
+      }
+
+      p {
+        font-family: Oswald, sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 200 !important;
+        line-height: 23.71px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .best-movie-details-btn-container {
+        display: flex !important;
+        justify-content: center !important;
+
+        button {
+          background-color: red !important;
+          color: white !important;
+          padding: 8px 16px !important;
+          border: none !important;
+          cursor: pointer !important;
+          border-radius: 25px !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+        }
+      }
     }
   }
 
-  #best-movie-details {
-    flex-direction: column !important; /* Stack image and info vertically */
-    align-items: center !important;
+  #top-rated-movies .section-title {
+    text-align: center;
+    font-family: Oswald, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 47.42px;
+  }
 
-    #best-movie-img {
-      width: 200px !important;
-      height: 200px !important;
-      margin-bottom: 20px !important;
-    }
-
-    .movie-info {
-      #best-movie-title {
-        font-size: 20px !important;
-        line-height: 28px !important;
-      }
-
-      #best-movie-summary {
-        font-size: 14px !important;
-        line-height: 20px !important;
-        margin: 10px 0 !important;
-      }
-
-      #best-movie-details-btn {
-        width: 100px !important;
-        height: 40px !important;
-        font-size: 14px !important;
-      }
-    }
+  .movie-item {
+    width: 329px;
+    height: 325.05px;
+    margin: 10px auto;
+    flex: 0 0 100%;
   }
 
   .movie-overlay {
-    bottom: 20px !important; /* Adjust the bottom position of the overlay for smaller screens */
+    bottom: 20px;
+    transform: translateY(50%);
+    height: auto;
+    padding: 10px;
+  }
 
-    h3 {
-      font-size: 20px !important;
-    }
+  .movie-overlay h3 {
+    font-family: Oswald, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 35.57px;
+  }
 
-    .details-btn {
-      font-size: 12px !important;
-      padding: 6px 10px !important; /* Adjust padding for smaller screens */
-    }
+  .movie-overlay .details-btn {
+    font-family: Oswald, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20.75px;
+    padding: 6px 10px;
+  }
+
+  #category-select {
+    width: 285px;
+    height: 68px;
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid $primary-color;
+    border-width: 1px 0 0 0;
+    font-family: Oswald, sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+  .category-title-container h2 {
+    display: none;
   }
 }
