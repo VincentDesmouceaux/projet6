@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const apiBaseURL = 'http://127.0.0.1:8000/api/v1/titles/';
     const genresURL = 'http://127.0.0.1:8000/api/v1/genres/';
-    const defaultImageUrl = 'img/icon-image-not-found-free-vector.jpg'; // Update with the actual path to your default image
+    const defaultImageUrl = 'img/icon-image-not-found-free-vector.jpg';
 
     const state = {
         'top-rated-movies-list': { page1: 1, page2: 2 },
@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchGenres(genresURL);
 
     // Fetch and display custom category movies based on user selection
-    document.getElementById('category-select').addEventListener('change', (event) => {
+    document.getElementById('category-select').addEventListener('change', async (event) => {
         const selectedGenre = event.target.value;
         state['custom-category-list'] = { page1: 1, page2: 2 };  // Reset page state for custom category
-        initMoviesWithPagination(`${apiBaseURL}?genre=${selectedGenre}&sort_by=-imdb_score&limit=5`, 'custom-category-list', 6);
+        await initMoviesWithPagination(`${apiBaseURL}?genre=${selectedGenre}&sort_by=-imdb_score&limit=5`, 'custom-category-list', 6);
     });
 
     async function fetchAndDisplayBestMovie(url) {
@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function initMoviesWithPagination(url, elementId, limit) {
+    async function initMoviesWithPagination(url, elementId, limit) {
         const container = document.getElementById(elementId);
+        const showMoreBtn = document.querySelector(`.show-more[data-target="${elementId}"]`);
 
         async function fetchMovies(reset = false) {
             if (reset) {
@@ -88,18 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 state[elementId].page1 += 2;
                 state[elementId].page2 += 2; // Update the page state
+
+                // Show or hide the "Voir plus" button based on the number of displayed movies
+                await updateShowMoreButtonVisibility(elementId, showMoreBtn);
             } catch (error) {
                 // Error handling (silent)
             }
         }
 
         // Initial fetch
-        fetchMovies(true);
+        await fetchMovies(true);
 
         // Add event listener for the "Voir plus" button
-        const showMoreBtn = document.querySelector(`#${elementId}`).nextElementSibling;
-        showMoreBtn.addEventListener('click', async () => {
-            await fetchMovies(); // Reset container before fetching new movies
+        showMoreBtn.addEventListener('click', () => {
+            if (showMoreBtn.textContent === "Voir plus") {
+                container.classList.add('show-all');
+                showMoreBtn.textContent = "Voir moins";
+            } else {
+                container.classList.remove('show-all');
+                showMoreBtn.textContent = "Voir plus";
+            }
         });
     }
 
@@ -156,6 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         container.appendChild(movieElement);
+    }
+
+    async function updateShowMoreButtonVisibility(elementId, showMoreBtn) {
+        const container = document.getElementById(elementId);
+        const movieItems = container.querySelectorAll('.movie-item');
+        if (movieItems.length > 0) {
+            showMoreBtn.style.display = 'block';
+        } else {
+            showMoreBtn.style.display = 'none';
+        }
     }
 
     // Function to extract the year from a date string
@@ -218,8 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="modal-header" style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
                                         <div class="modal-title-container" style="flex: 1; margin-left: 10px;">
                                             <h3 class="modal-title" style="font-family: Oswald, sans-serif; font-size: 48px; font-weight: 600; line-height: 71.14px; text-align: left; margin: 0;">${movie.title}</h3>
-                                            <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${getYearFromDate(movie.date_published)} - ${movie.genres.join(', ')}</h2>
-                                            <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">${movie.duration} minutes (${movie.countries.join(', ')})</h2>
+                                            <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align left; margin: 10px 0;">${getYearFromDate(movie.date_published)} - ${movie.genres.join(', ')}</h2>
+                                            <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align left; margin: 10px 0;">${movie.duration} minutes (${movie.countries.join(', ')})</h2>
                                             <h2 style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin: 10px 0;">IMDB score: ${movie.imdb_score}</h2>
                                             <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 600; line-height: 35.57px; text-align: left; margin-top: 10px;">Réalisé par:</div>
                                             <div style="font-family: Oswald, sans-serif; font-size: 24px; font-weight: 400; line-height: 35.57px; text-align: left; margin-top: 5px;">${movie.directors.join(', ')}</div>

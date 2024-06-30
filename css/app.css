@@ -154,7 +154,7 @@ section {
 }
 @media (max-width: 480px) {
   #best-movie .best-movie-img-container img {
-    width: 100%;
+    width: 298px;
   }
 }
 @media (max-width: 768px) {
@@ -164,7 +164,7 @@ section {
 }
 @media (max-width: 480px) {
   #best-movie .best-movie-img-container img {
-    height: auto;
+    height: 241px;
   }
 }
 #best-movie .best-movie-info {
@@ -173,6 +173,7 @@ section {
   justify-content: space-between;
   flex: 1;
   box-sizing: border-box;
+  width: 100%;
 }
 #best-movie .best-movie-info h3 {
   font-family: "Oswald", sans-serif;
@@ -413,6 +414,18 @@ body.modal-open {
   overflow: hidden;
 }
 
+.show-all .movie-item {
+  display: block !important;
+}
+
+@media (min-width: 769px) {
+  .show-more {
+    display: none !important;
+  }
+  .movie-list .movie-item {
+    display: block !important;
+  }
+}
 @media (max-width: 768px) {
   body {
     margin: 20px;
@@ -420,10 +433,10 @@ body.modal-open {
   .movie-item {
     flex: 0 0 calc(50% - 20px);
   }
-  .movie-list .movie-item {
+  .movie-list:not(.show-all) .movie-item:nth-child(n+5) {
     display: none;
   }
-  .movie-list .movie-item:nth-child(-n+4) {
+  .show-more {
     display: block;
   }
   .header-text h2 {
@@ -517,7 +530,7 @@ body.modal-open {
     display: block !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 20px !important;
+    padding: 10px !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
   }
@@ -528,14 +541,17 @@ body.modal-open {
     margin-bottom: 10px !important;
   }
   #best-movie .best-movie-img-container img {
-    width: 100% !important;
-    height: auto !important;
+    width: 298px !important;
+    height: 241px !important;
+    margin-left: auto !important;
+    object-fit: cover;
   }
   #best-movie .best-movie-info {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
+    width: 100% !important;
   }
   #best-movie .best-movie-info h3 {
     font-family: Oswald, sans-serif !important;
@@ -554,6 +570,7 @@ body.modal-open {
   #best-movie .best-movie-info .best-movie-details-btn-container {
     display: flex !important;
     justify-content: center !important;
+    width: 100%;
   }
   #best-movie .best-movie-info .best-movie-details-btn-container button {
     background-color: red !important;
@@ -577,6 +594,15 @@ body.modal-open {
     height: 325.05px;
     margin: 10px auto;
     flex: 0 0 100%;
+  }
+  #top-rated-movies .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #category-1 .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #category-2 .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #custom-category .movie-list:not(.show-all) .movie-item:nth-child(n+3) {
+    display: none;
+  }
+  .show-more {
+    display: block;
   }
   .movie-overlay {
     bottom: 20px;

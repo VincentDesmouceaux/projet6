@@ -179,8 +179,8 @@ section {
       width: 227px;
       height: 334px;
 
-      @include responsive(width, 227px, 168px, 100%);
-      @include responsive(height, 334px, 246px, auto);
+      @include responsive(width, 227px, 168px, 298px); // Adjusted width for 480px
+      @include responsive(height, 334px, 246px, 241px); // Adjusted height for 480px
     }
   }
 
@@ -190,6 +190,7 @@ section {
     justify-content: space-between;
     flex: 1;
     box-sizing: border-box;
+    width: 100%; // Add this line to ensure it takes full width
 
     h3 {
       font-family: $header-font-family;
@@ -372,6 +373,21 @@ body.modal-open {
   overflow: hidden;
 }
 
+.show-all .movie-item {
+  display: block !important; // Afficher tous les films lorsque show-all est ajouté
+}
+
+// Masquer les boutons "Voir plus" sur les grands écrans
+@media (min-width: 769px) {
+  .show-more {
+    display: none !important; // Utilisation de !important pour forcer le masquage
+  }
+  .movie-list .movie-item {
+    display: block !important;
+  }
+}
+
+// Masquer les films au-delà des 4 premiers sur les tablettes
 @media (max-width: 768px) {
   body {
     margin: 20px;
@@ -381,11 +397,11 @@ body.modal-open {
     flex: 0 0 calc(50% - 20px);
   }
 
-  .movie-list .movie-item {
+  .movie-list:not(.show-all) .movie-item:nth-child(n+5) {
     display: none;
   }
 
-  .movie-list .movie-item:nth-child(-n+4) {
+  .show-more {
     display: block;
   }
 
@@ -462,6 +478,7 @@ body.modal-open {
   }
 }
 
+// Masquer les films au-delà des 2 premiers sur les mobiles
 @media (max-width: 480px) {
   header {
     justify-content: center;
@@ -500,7 +517,7 @@ body.modal-open {
       display: block !important;
       flex-direction: column !important;
       align-items: center !important;
-      padding: 20px !important;
+      padding: 10px !important;
       margin: 0 auto !important;
       box-sizing: border-box !important;
     }
@@ -512,8 +529,10 @@ body.modal-open {
       margin-bottom: 10px !important;
 
       img {
-        width: 100% !important;
-        height: auto !important;
+        width: 298px !important; // Ensure the image width
+        height: 241px !important; // Ensure the image height
+        margin-left: auto !important;
+        object-fit: cover;
       }
     }
 
@@ -522,6 +541,7 @@ body.modal-open {
       flex-direction: column !important;
       align-items: center !important;
       text-align: center !important;
+      width: 100% !important; // Ensure it takes full width
 
       h3 {
         font-family: Oswald, sans-serif !important;
@@ -542,6 +562,7 @@ body.modal-open {
       .best-movie-details-btn-container {
         display: flex !important;
         justify-content: center !important;
+        width: 100%; // Add this line to ensure it takes full width
 
         button {
           background-color: red !important;
@@ -570,6 +591,17 @@ body.modal-open {
     height: 325.05px;
     margin: 10px auto;
     flex: 0 0 100%;
+  }
+
+  #top-rated-movies .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #category-1 .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #category-2 .movie-list:not(.show-all) .movie-item:nth-child(n+3),
+  #custom-category .movie-list:not(.show-all) .movie-item:nth-child(n+3) {
+    display: none;
+  }
+
+  .show-more {
+    display: block;
   }
 
   .movie-overlay {
