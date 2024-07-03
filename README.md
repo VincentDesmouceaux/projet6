@@ -16,45 +16,44 @@ JustStreamIt est une application web qui permet de consulter des informations su
 
 1. **Cloner le dépôt du backend**
 
-    
+    ```bash
     git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
-
     cd ocmovies-api-fr
-    
+    ```
 
 2. **Créer un environnement virtuel**
 
     Sous Windows :
 
-    
+    ```bash
     python -m venv env
     env\Scripts\activate
-    
+    ```
 
     Sous MacOS/Linux :
 
-    
+    ```bash
     python3 -m venv env
     source env/bin/activate
-    
+    ```
 
 3. **Installer les dépendances**
 
-    
+    ```bash
     pip install -r requirements.txt
-    
+    ```
 
 4. **Créer et alimenter la base de données**
 
-    
+    ```bash
     python manage.py create_db
-    
+    ```
 
 5. **Démarrer le serveur**
 
-    
+    ```bash
     python manage.py runserver
-    
+    ```
 
     L'API sera disponible à l'adresse : `http://localhost:8000/api/v1/`.
 
@@ -62,25 +61,24 @@ JustStreamIt est une application web qui permet de consulter des informations su
 
 1. **Cloner le dépôt du frontend**
 
-    
+    ```bash
     git clone https://github.com/votre-utilisateur/JustStreamIt.git
-
     cd JustStreamIt
-    
+    ```
 
 2. **Installer les dépendances Node.js**
 
-    
+    ```bash
     npm install
-    
+    ```
 
 3. **Lancer le serveur SCSS pour le développement**
 
     Si vous souhaitez développer avec SCSS, vous pouvez lancer la commande suivante pour surveiller les changements SCSS et les compiler automatiquement en CSS :
 
-    
+    ```bash
     npm run scss
-    
+    ```
 
 4. **Utiliser Live Server**
 
@@ -88,7 +86,7 @@ JustStreamIt est une application web qui permet de consulter des informations su
 
 ### 🗂️ Structure du Projet
 
-
+```
 .
 ├── css
 │   ├── app.css
@@ -101,7 +99,7 @@ JustStreamIt est une application web qui permet de consulter des informations su
 ├── index.html
 ├── package.json
 └── README.md
-
+```
 
 ## 🌟 Fonctionnalités
 
