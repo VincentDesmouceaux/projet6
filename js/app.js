@@ -1,5 +1,6 @@
 /**
- * Main script for JustStreamIt application.
+ * Script principal pour l'application JustStreamIt.
+ * Ce script gère l'affichage des films, des catégories et des détails des films via des requêtes API.
  */
 document.addEventListener('DOMContentLoaded', () => {
     const apiBaseURL = 'http://127.0.0.1:8000/api/v1/titles/';
@@ -16,33 +17,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const container = document.querySelector('.container');
 
-    // Fetch and display the best movie
+    // Récupérer et afficher le meilleur film
     const bestFilmsUrl = `${apiBaseURL}?sort_by=-imdb_score&limit=1`;
     fetchAndDisplayBestMovie(bestFilmsUrl);
 
-    // Initialize top-rated movies
+    // Initialiser les films les mieux notés
     initMoviesWithPagination(`${apiBaseURL}?sort_by=-imdb_score&limit=5`, 'top-rated-movies-list', 6);
 
-    // Initialize category 1 movies (Action)
+    // Initialiser les films de la catégorie 1 (Action)
     initMoviesWithPagination(`${apiBaseURL}?genre=Action&sort_by=-imdb_score&limit=5`, 'category-1-list', 6);
 
-    // Initialize category 2 movies (Comedy)
+    // Initialiser les films de la catégorie 2 (Comédie)
     initMoviesWithPagination(`${apiBaseURL}?genre=Comedy&sort_by=-imdb_score&limit=5`, 'category-2-list', 6);
 
-    // Fetch and display genres in the select dropdown
+    // Récupérer et afficher les genres dans la liste déroulante
     fetchGenres(genresURL);
 
-    // Fetch and display custom category movies based on user selection
+    // Récupérer et afficher les films de la catégorie personnalisée en fonction de la sélection de l'utilisateur
     document.getElementById('category-select').addEventListener('change', async (event) => {
         const selectedGenre = event.target.value;
-        state['custom-category-list'] = { page1: 1, page2: 2 };  // Reset page state for custom category
+        state['custom-category-list'] = { page1: 1, page2: 2 };  // Réinitialiser l'état de la page pour la catégorie personnalisée
         await initMoviesWithPagination(`${apiBaseURL}?genre=${selectedGenre}&sort_by=-imdb_score&limit=5`, 'custom-category-list', 6);
         updateShowCustomButtonVisibility('custom-category-list');
     });
 
     /**
-     * Fetch and display the best movie.
-     * @param {string} url - The URL to fetch the best movie.
+     * Récupérer et afficher le meilleur film.
+     * @param {string} url - L'URL pour récupérer le meilleur film.
      */
     async function fetchAndDisplayBestMovie(url) {
         try {
@@ -58,15 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('best-movie-summary').textContent = detailData.long_description;
             document.getElementById('best-movie-details-btn').dataset.id = movie.id;
         } catch (error) {
-            // Error handling (silent)
+            // Gestion silencieuse des erreurs
         }
     }
 
     /**
-     * Initialize movies with pagination.
-     * @param {string} url - The URL to fetch movies.
-     * @param {string} elementId - The ID of the element to display the movies.
-     * @param {number} limit - The number of movies to display.
+     * Initialiser les films avec pagination.
+     * @param {string} url - L'URL pour récupérer les films.
+     * @param {string} elementId - L'ID de l'élément pour afficher les films.
+     * @param {number} limit - Le nombre de films à afficher.
      */
     async function initMoviesWithPagination(url, elementId, limit) {
         const container = document.getElementById(elementId);
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let displayedMovies = 0;
             try {
-                container.innerHTML = '';  // Clear the container before fetching new movies
+                container.innerHTML = '';  // Vider le conteneur avant de récupérer de nouveaux films
 
                 for (const page of [page1, page2]) {
                     const response = await fetch(`${url}&page=${page}`);
@@ -99,22 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         displayedMovies++;
                     }
 
-                    if (!data.next) break; // Exit if there are no more pages
+                    if (!data.next) break; // Sortir si il n'y a plus de pages
                 }
                 state[elementId].page1 += 2;
-                state[elementId].page2 += 2; // Update the page state
+                state[elementId].page2 += 2; // Mettre à jour l'état des pages
 
-                // Show or hide the "Voir plus" button based on the number of displayed movies
+                // Afficher ou masquer le bouton "Voir plus" en fonction du nombre de films affichés
                 await updateShowMoreButtonVisibility(elementId, showMoreBtn);
             } catch (error) {
-                // Error handling (silent)
+                // Gestion silencieuse des erreurs
             }
         }
 
-        // Initial fetch
+        // Récupération initiale
         await fetchMovies(true);
 
-        // Add event listener for the "Voir plus" button
+        // Ajouter un écouteur d'événements pour le bouton "Voir plus"
         showMoreBtn.addEventListener('click', () => {
             if (showMoreBtn.textContent === "Voir plus") {
                 container.classList.add('show-all');
@@ -127,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Fetch genres and populate the select dropdown.
-     * @param {string} url - The URL to fetch genres.
+     * Récupérer les genres et remplir la liste déroulante.
+     * @param {string} url - L'URL pour récupérer les genres.
      */
     async function fetchGenres(url) {
         const categorySelect = document.getElementById('category-select');
-        categorySelect.innerHTML = '';  // Clear existing options
+        categorySelect.innerHTML = '';  // Vider les options existantes
 
         async function fetchAllGenres(page = 1) {
             try {
@@ -149,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     await fetchAllGenres(page + 1);
                 }
             } catch (error) {
-                // Error handling (silent)
+                // Gestion silencieuse des erreurs
             }
         }
 
@@ -157,10 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Validate and return a valid image URL.
-     * @param {string} url - The URL of the image.
-     * @param {string} defaultImageUrl - The default image URL to use if the original URL is invalid.
-     * @returns {Promise<string>} - A promise that resolves to a valid image URL.
+     * Valider et retourner une URL d'image valide.
+     * @param {string} url - L'URL de l'image.
+     * @param {string} defaultImageUrl - L'URL de l'image par défaut à utiliser si l'URL d'origine est invalide.
+     * @returns {Promise<string>} - Une promesse qui se résout en une URL d'image valide.
      */
     async function getValidImageUrl(url, defaultImageUrl) {
         return new Promise((resolve) => {
@@ -172,9 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Display a movie in the specified element.
-     * @param {Object} movie - The movie object to display.
-     * @param {string} elementId - The ID of the element to display the movie in.
+     * Afficher un film dans l'élément spécifié.
+     * @param {Object} movie - L'objet film à afficher.
+     * @param {string} elementId - L'ID de l'élément pour afficher le film.
      */
     function displayMovie(movie, elementId) {
         const container = document.getElementById(elementId);
@@ -197,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Update the visibility of the "Voir plus" button based on the number of displayed movies.
-     * @param {string} elementId - The ID of the element containing the movies.
-     * @param {HTMLElement} showMoreBtn - The "Voir plus" button element.
+     * Mettre à jour la visibilité du bouton "Voir plus" en fonction du nombre de films affichés.
+     * @param {string} elementId - L'ID de l'élément contenant les films.
+     * @param {HTMLElement} showMoreBtn - L'élément du bouton "Voir plus".
      */
     async function updateShowMoreButtonVisibility(elementId, showMoreBtn) {
         const container = document.getElementById(elementId);
@@ -212,8 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Update the visibility of the "Show Custom" button based on the number of displayed custom category movies.
-     * @param {string} elementId - The ID of the element containing the custom category movies.
+     * Mettre à jour la visibilité du bouton "Voir plus" personnalisé en fonction du nombre de films de la catégorie personnalisée affichés.
+     * @param {string} elementId - L'ID de l'élément contenant les films de la catégorie personnalisée.
      */
     async function updateShowCustomButtonVisibility(elementId) {
         const container = document.getElementById(elementId);
@@ -227,18 +228,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Extract the year from a date string.
-     * @param {string} dateString - The date string to extract the year from.
-     * @returns {number} - The extracted year.
+     * Extraire l'année d'une chaîne de date.
+     * @param {string} dateString - La chaîne de date pour extraire l'année.
+     * @returns {number} - L'année extraite.
      */
     function getYearFromDate(dateString) {
         return new Date(dateString).getFullYear();
     }
 
-    // Event listener for "Détails" buttons to open modal with movie details
+    // Écouteur d'événements pour les boutons "Détails" pour ouvrir la modal avec les détails du film
     document.addEventListener('click', async event => {
         if (event.target.classList.contains('details-btn') || event.target.id === 'best-movie-details-btn') {
-            // Prevent opening the modal on mobile devices (max-width: 480px)
+            // Empêcher l'ouverture de la modal sur les appareils mobiles (max-width: 480px)
             if (window.innerWidth <= 480) return;
 
             const movieId = event.target.dataset.id;
@@ -246,13 +247,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${apiBaseURL}${movieId}`);
                 const movie = await response.json();
 
-                // Remove existing modal if it exists
+                // Supprimer la modal existante si elle existe
                 const existingModal = document.querySelector('.modal-wrapper');
                 if (existingModal) {
                     existingModal.remove();
                 }
 
-                // Create and display the modal
+                // Créer et afficher la modal
                 let modalContent = `
                     <div class="modal-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: rgba(0, 0, 0, 0.5); z-index: 2000;">
                         <div class="modal" style="background: #fff; border: 6px solid #333; padding: 20px; width: 778px; height: 939px; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); position: relative; display: flex; flex-direction: column;">
@@ -283,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
-                // Apply responsive styles for modal
+                // Appliquer les styles réactifs pour la modal
                 if (window.innerWidth <= 768) {
                     modalContent = `
                         <div class="modal-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: rgba(0, 0, 0, 0.5); z-index: 2000;">
@@ -317,22 +318,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modalWrapper = document.createElement('div');
                 modalWrapper.innerHTML = modalContent;
 
-                document.body.appendChild(modalWrapper); // Append the modal to the body
-                document.body.classList.add('modal-open'); // Prevent body scroll
+                document.body.appendChild(modalWrapper); // Ajouter la modal au corps du document
+                document.body.classList.add('modal-open'); // Empêcher le défilement du corps du document
 
-                // Close modal event
+                // Événement de fermeture de la modal
                 modalWrapper.querySelector('.close-btn').addEventListener('click', () => {
                     modalWrapper.remove();
-                    document.body.classList.remove('modal-open'); // Allow body scroll
+                    document.body.classList.remove('modal-open'); // Autoriser le défilement du corps du document
                 });
 
-                // Handle error for modal image
+                // Gérer l'erreur pour l'image de la modal
                 const modalImg = modalWrapper.querySelector('.modal-img');
                 modalImg.addEventListener('error', () => {
-                    modalImg.src = defaultImageUrl; // Set default image if the image fails to load
+                    modalImg.src = defaultImageUrl; // Définir l'image par défaut si l'image ne se charge pas
                 });
             } catch (error) {
-                // Error handling (silent)
+                // Gestion silencieuse des erreurs
             }
         }
     });
