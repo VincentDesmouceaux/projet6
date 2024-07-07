@@ -81,7 +81,7 @@ JustStreamIt est une application web qui permet de consulter des informations su
     Si vous souhaitez développer avec SCSS, vous pouvez lancer la commande suivante pour surveiller les changements SCSS et les compiler automatiquement en CSS :
 
     
-    npm run scss
+    npm run sass
     
 
 4. **Utiliser Live Server**
