@@ -18,7 +18,8 @@ JustStreamIt est une application web qui permet de consulter des informations su
 
     
     git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
-    cd ocmovies-api-fr
+
+    cd OCMovies-API-EN-FR
     
 
 2. **Créer un environnement virtuel**
@@ -64,9 +65,9 @@ JustStreamIt est une application web qui permet de consulter des informations su
 1. **Cloner le dépôt du frontend**
 
     
-    git clone https://github.com/votre-utilisateur/JustStreamIt.git
+    git clone https://github.com/VincentDesmouceaux/projet6.git
 
-    cd JustStreamIt
+    cd projet6
     
 
 2. **Installer les dépendances Node.js**
